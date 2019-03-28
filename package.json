@@ -1,0 +1,12 @@
+{
+  "name": "OrderTotalKata",
+  "version": "1.0.0",
+  "description": "Calculating an order total based on various products being added to the cart with or without different types of discounts applied.",
+  "main": "index.js",
+  "author": "Raymond Willett ",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "jest": "^24.5.0"
+  }
+}
