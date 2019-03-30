@@ -38,4 +38,26 @@ describe('The ProductManager module', () => {
             }
         });
     });
+
+    test('That inventory\'s complex catalog is constructed', () => {
+        let testProducts = require('./catalog.test.json').valid,
+            productIDs = new Set(testProducts.map( product => product.ID ));
+        
+        let _inventory = new ProductManager(testProducts),
+            productsInCatalog = new Set(Object.keys(_inventory.catalog));
+
+        // Test that the product IDs match
+        expect(productsInCatalog).toEqual(productIDs);
+
+        // Test that each product matches
+        testProducts.forEach((product) => {
+            const { ID, pricePerUnit, isDivisibleUnit } = product,
+                catalogRecord = _inventory.catalog[ID];
+
+            expect(catalogRecord).toEqual({
+                pricePerUnit,
+                isDivisibleUnit
+            });
+        });
+    });
 });
