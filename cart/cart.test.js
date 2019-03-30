@@ -45,6 +45,25 @@ describe('The cart\'s AddItem method', () => {
         });
     });
 
+    test('That adding an already existing item to the cart increases the quantity', () => {
+        const productID = 'can of soup',
+            quantity = 2;
+
+        expect(cart.productLineItems).toEqual({}); // ensure cart is empty
+        cart.addItem(productID, quantity);
+        expect(cart.productLineItems).toEqual({
+            [productID]: {
+                quantity
+            }
+        });
+        cart.addItem(productID, 1);
+        expect(cart.productLineItems).toEqual({
+            [productID]: {
+                quantity: quantity + 1
+            }
+        });
+    });
+
     test('That addItem can handle items with quantities that are not integers', () => {
         const productID = 'ground beef',
             quantity = 1.24;
@@ -54,6 +73,25 @@ describe('The cart\'s AddItem method', () => {
         expect(cart.productLineItems).toEqual({
             [productID]: {
                 quantity
+            }
+        });
+    });
+
+    test('That adding an already existing item to the cart increases the non-integer qunaity', () => {
+        const productID = 'ground beef',
+            quantity = 1.24;
+
+        expect(cart.productLineItems).toEqual({}); // ensure cart is empty
+        cart.addItem(productID, quantity);
+        expect(cart.productLineItems).toEqual({
+            [productID]: {
+                quantity
+            }
+        });
+        cart.addItem(productID, .57);
+        expect(cart.productLineItems).toEqual({
+            [productID]: {
+                quantity: quantity + .57
             }
         });
     });
