@@ -25,3 +25,10 @@ describe('The cart\'s product line items', () => {
         expect(cart.productLineItems).toEqual({});
     });
 });
+
+describe('The cart\'s AddItem method', () => {
+    test('That addItem is a function', () => {
+        expect(cart.addItem).toBeDefined();
+        expect(typeof cart.addItem).toBe('function');
+    });
+});
