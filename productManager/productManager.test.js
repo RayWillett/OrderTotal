@@ -22,15 +22,11 @@ describe('The ProductManager module', () => {
 });
 
 describe('The catalog construction', () => {
+    let testCatalogData = require('./catalog.test.json');
+
     test('That inventory\'s simple catalog is constructed', () => {
-        const ID = 'can of soup',
-            pricePerUnit = 1.99,
-            isDivisibleUnit = false,
-            product = {
-                ID,
-                pricePerUnit,
-                isDivisibleUnit
-            },
+        const product = testCatalogData.valid[0], // Get a single product
+            { ID, pricePerUnit, isDivisibleUnit } = product,
             _inventory = new ProductManager([product]);
 
         expect(_inventory.catalog).toEqual({
@@ -42,16 +38,16 @@ describe('The catalog construction', () => {
     });
 
     test('That inventory\'s complex catalog is constructed', () => {
-        let testProducts = require('./catalog.test.json').valid,
+        let testProducts = testCatalogData.valid,
             productIDs = new Set(testProducts.map( product => product.ID ));
         
         let _inventory = new ProductManager(testProducts),
             productsInCatalog = new Set(Object.keys(_inventory.catalog));
 
-        // Test that the product IDs match
+        // Test that the product IDs in the catalog match the expected product IDs
         expect(productsInCatalog).toEqual(productIDs);
 
-        // Test that each product matches
+        // Test that each product in the catalog matches the definition
         testProducts.forEach((product) => {
             const { ID, pricePerUnit, isDivisibleUnit } = product,
                 catalogRecord = _inventory.catalog[ID];
