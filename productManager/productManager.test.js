@@ -3,7 +3,7 @@ const ProductManager = require('./index');
 let inventory;
 
 beforeEach(() => {
-    inventory = new ProductManager();
+    inventory = new ProductManager([]);
 });
 
 afterEach(() => {
