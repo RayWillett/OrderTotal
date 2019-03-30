@@ -44,4 +44,17 @@ describe('The cart\'s AddItem method', () => {
             }
         });
     });
+
+    test('That addItem can handle items with quantities that are not integers', () => {
+        const productID = 'ground beef',
+            quantity = 1.24;
+
+        expect(cart.productLineItems).toEqual({}); // ensure cart is empty
+        cart.addItem(productID, quantity);
+        expect(cart.productLineItems).toEqual({
+            [productID]: {
+                quantity
+            }
+        });
+    });
 });
