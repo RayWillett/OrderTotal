@@ -19,7 +19,9 @@ describe('The ProductManager module', () => {
         expect(inventory.catalog).toBeDefined();
         expect(inventory.catalog).toEqual({});
     });
+});
 
+describe('The catalog construction', () => {
     test('That inventory\'s simple catalog is constructed', () => {
         const ID = 'can of soup',
             pricePerUnit = 1.99,

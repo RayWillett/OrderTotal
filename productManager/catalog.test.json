@@ -25,5 +25,17 @@
             "pricePerUnit": 5.99,
             "isDivisibleUnit": false
         }
+    ],
+    "duplicated": [
+        {
+            "ID": "ground beef",
+            "pricePerUnit": 1.99,
+            "isDivisibleUnit": true
+        },
+        {
+            "ID": "ground beef",
+            "pricePerUnit": 1.99,
+            "isDivisibleUnit": true
+        }
     ]
 }
