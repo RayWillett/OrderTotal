@@ -96,3 +96,11 @@ describe('The cart\'s AddItem method', () => {
         });
     });
 });
+
+
+describe('The cart\'s getPretaxTotal method', () => {
+    test('That getPretaxTotal is a function', () => {
+        expect(cart.getPretaxTotal).toBeDefined();
+        expect(typeof cart.getPretaxTotal).toBe('function');
+    });
+});

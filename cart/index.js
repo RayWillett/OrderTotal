@@ -23,7 +23,12 @@ class Cart {
         this.productLineItems[productID].quantity += quantity;
     }
 
-
+    /**
+     * @returns {number} - The pretax total of the items in the cart.
+     */
+    getPretaxTotal () {
+        return 0;
+    }
 }
 
 module.exports = Cart;
