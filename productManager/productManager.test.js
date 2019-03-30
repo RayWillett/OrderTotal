@@ -19,4 +19,23 @@ describe('The ProductManager module', () => {
         expect(inventory.catalog).toBeDefined();
         expect(inventory.catalog).toEqual({});
     });
+
+    test('That inventory\'s simple catalog is constructed', () => {
+        const ID = 'can of soup',
+            pricePerUnit = 1.99,
+            isDivisibleUnit = false,
+            product = {
+                ID,
+                pricePerUnit,
+                isDivisibleUnit
+            },
+            _inventory = new ProductManager([product]);
+
+        expect(_inventory.catalog).toEqual({
+            [ID]: {
+                pricePerUnit,
+                isDivisibleUnit
+            }
+        });
+    });
 });

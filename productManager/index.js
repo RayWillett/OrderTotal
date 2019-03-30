@@ -6,10 +6,10 @@
  */
 const appendProductToCatalog = (catalog, product) => {
     const { ID, pricePerUnit, isDivisibleUnit } = product;
-    if (catalog.hasOwnProperty(productID)) {
-        throw Error(`Product with ID {productID} is defined more than once.`);
+    if (catalog.hasOwnProperty(ID)) {
+        throw Error(`Product with ID {ID} is defined more than once.`);
     }
-    catalog[productID] = {
+    catalog[ID] = {
         pricePerUnit,
         isDivisibleUnit
     }
