@@ -1,6 +1,6 @@
 class Cart {
     constructor () {
-        return;
+        this.productLineItems = {};
     }
 }
 
