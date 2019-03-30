@@ -103,4 +103,9 @@ describe('The cart\'s getPretaxTotal method', () => {
         expect(cart.getPretaxTotal).toBeDefined();
         expect(typeof cart.getPretaxTotal).toBe('function');
     });
+
+    test('That an empty cart has a $0 total', () => {
+        const pretaxTotal = cart.getPretaxTotal();
+        expect(pretaxTotal).toBe(0);
+    });
 });
