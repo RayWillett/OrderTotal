@@ -31,4 +31,17 @@ describe('The cart\'s AddItem method', () => {
         expect(cart.addItem).toBeDefined();
         expect(typeof cart.addItem).toBe('function');
     });
+
+    test('That calling addItem results in a single item being added to the cart', () => {
+        const productID = 'can of soup',
+            quantity = 1;
+
+        expect(cart.productLineItems).toEqual({}); // ensure cart is empty
+        cart.addItem(productID, quantity);
+        expect(cart.productLineItems).toEqual({
+            [productID]: {
+                quantity
+            }
+        });
+    });
 });
