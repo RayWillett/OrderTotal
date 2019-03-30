@@ -16,7 +16,7 @@ describe('The cart module', () => {
     });
 })
 
-describe('The cart\'s product line items', () => {
+describe('The cart\'s properties', () => {
     test('That cart has a a productLineItems property', () => {
         expect(cart.productLineItems).toBeDefined();
     });
