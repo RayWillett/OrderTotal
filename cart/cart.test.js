@@ -20,4 +20,8 @@ describe('The cart\'s product line items', () => {
     test('That cart has a a productLineItems property', () => {
         expect(cart.productLineItems).toBeDefined();
     });
+
+    test('That the cart is empty', () => {
+        expect(cart.productLineItems).toEqual({});
+    });
 });
