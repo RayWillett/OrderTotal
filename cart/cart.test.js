@@ -39,6 +39,12 @@ describe('The cart\'s properties', () => {
     test('That the cart is empty', () => {
         expect(cart.productLineItems).toEqual({});
     });
+
+    test('That cart has a a productManager property implementing the correct API', () => {
+        expect(cart.productManager).toBeDefined();
+        expect(cart.productManager.getProduct).toBeDefined();
+        expect(typeof cart.productManager.getProduct).toBe('function');
+    });
 });
 
 describe('The cart\'s AddItem method', () => {
