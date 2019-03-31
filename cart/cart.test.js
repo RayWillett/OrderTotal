@@ -127,6 +127,23 @@ describe('The cart\'s AddItem method', () => {
         }).toThrow();
         expect(cart.productLineItems).toEqual({}); // ensure cart is still empty
     });
+
+    test('That addItem will not accept a product which is not defined in the catalog', () => {
+        const productID = 'can of soup',
+            quantity = 1;
+
+        const mockedGetProduct = getMockedProductManager((productID => {
+            return ['beef stew', 'toilet paper', 'marshmallows'].indexOf(productID) > -1;
+        }));
+
+        const _cart = new Cart(mockedGetProduct);
+
+        expect(_cart.productLineItems).toEqual({}); // ensure cart is empty
+        expect(() => {
+            _cart.addItem(productID, quantity);
+        }).toThrow();
+        expect(_cart.productLineItems).toEqual({}); // ensure cart is still empty
+    });
 });
 
 

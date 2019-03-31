@@ -30,6 +30,9 @@ class Cart {
     }
 
     validateItem (productID, quantity) {
+        if (!this.productManager.getProduct(productID)) {
+            throw Error(message.error.invalidID.replace('{ID}', productID));
+        }
         if (isNaN(quantity) || 0 >= quantity) {
             throw Error(message.error.invalidQuantity.replace('{ID}', productID).replace('{quantity}', quantity));
         }
