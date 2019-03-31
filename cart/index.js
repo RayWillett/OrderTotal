@@ -39,6 +39,7 @@ class Cart {
         if (!this.productManager.getProduct(productID)) {
             throw Error(message.error.invalidID.replace('{ID}', productID));
         }
+        // TODO: that quantity matches the type of item e.g. a can of soup cannot have a quantity of 0.5
         if (isNaN(quantity) || 0 >= quantity) {
             throw Error(message.error.invalidQuantity.replace('{ID}', productID).replace('{quantity}', quantity));
         }
