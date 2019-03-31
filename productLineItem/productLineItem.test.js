@@ -36,4 +36,9 @@ describe('The productLineItem getPrice method', () => {
     test('That a productLineItem with 1 quantity has a price equal to the product definition\'s price', () => {
         expect(productLineItem.getPrice()).toEqual(productDefinition.pricePerUnit);
     });
+
+    test('That a productLineItem with 0 quantity has a price of $0', () => {
+        productLineItem = new ProductLineItem(productDefinition, 0);
+        expect(productLineItem.getPrice()).toEqual(0);
+    });
 });
