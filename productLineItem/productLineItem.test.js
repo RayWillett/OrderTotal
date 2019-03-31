@@ -1,9 +1,11 @@
-const ProductLineItem = require('./index.js');
+const ProductLineItem = require('./index.js'),
+    productDefinitions = require('./product.test.json');
 
-let productLineItem, productDefinition;
+let productLineItem, productDefinition, fractionalProductLineItem;
 
 beforeEach(() => {
-    productDefinition = require('./product.test.json')[0];
+    productDefinition = productDefinitions[0];
+    fractionalProductLineItem = productDefinitions[1];
     productLineItem = new ProductLineItem(productDefinition, 1);
 });
 
@@ -14,6 +16,12 @@ afterEach(() => {
 describe('The productLineItem module', () => {
     test('That productLineItem exists', () => {
         expect(productLineItem).toBeDefined();
+    });
+
+    test('That ProductLineItem constructor does not accept an non-number quantity.', () => {
+        expect(() => {
+            productLineItem = new ProductLineItem(productLineItem, "asdf");
+        }).toThrow();
     });
 
     test('That productLineItem has a product property', () => {
@@ -40,11 +48,6 @@ describe('The productLineItem module', () => {
 describe('The productLineItem getPrice method', () => {
     test('That a productLineItem with 1 quantity has a price equal to the product definition\'s price', () => {
         expect(productLineItem.getPrice()).toEqual(productDefinition.pricePerUnit);
-    });
-
-    test('That a productLineItem with 0 quantity has a price of $0', () => {
-        productLineItem = new ProductLineItem(productDefinition, 0);
-        expect(productLineItem.getPrice()).toEqual(0);
     });
 });
 

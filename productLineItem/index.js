@@ -1,3 +1,12 @@
+const message = require('../util/message.json');
+
+const validateQuantity = (product, quantity) => {
+    const isFractionalQuantity = !Number.isInteger(quantity);
+    if (isNaN(quantity) || 0 >= quantity || (isFractionalQuantity && !giproduct.isDivisibleUnit)) {
+        throw Error(message.error.invalidQuantity.replace('{ID}', product.ID).replace('{quantity}', quantity));
+    }
+};
+
 class ProductLineItem {
     /**
      * A wrapper class representing products in the cart.
@@ -7,6 +16,7 @@ class ProductLineItem {
      * @param quantity {number} - the quantity being added to the cart.
      */
      constructor (product, quantity) {
+        validateQuantity(product, quantity);
         this.product = product;
         this.quantity = quantity;
      }
@@ -26,7 +36,7 @@ class ProductLineItem {
        * @param increaseBy {number} the amount to increase the quantity by
        */
       addQuantity (increaseBy) {
-        //TODO: Add validation here.
+        validateQuantity(this.product, increaseBy);
         this.quantity += increaseBy;
       }
 }
