@@ -1,6 +1,7 @@
 {
     "error": {
         "duplicateProductID": "Product with ID {ID} is defined more than once.",
-        "invalidID": "Product with ID {ID} is not defined in the catalog."
+        "invalidID": "Product with ID {ID} is not defined in the catalog.",
+        "invalidQuantity": "Product with ID {ID} has an invalid quantity of {quantity}"
     }
 }
