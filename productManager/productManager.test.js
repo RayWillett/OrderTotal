@@ -95,4 +95,10 @@ describe('Product retrieval from the productManager', () => {
             pricePerUnit
         });
     });
+
+    test('That null will be returned from the ProductManager if no product exists in the catalog matching the provided ID.', () => {
+        const product = inventory.getProduct('some invalid product ID');
+
+        expect(product).toBeNull();
+    });
 })
