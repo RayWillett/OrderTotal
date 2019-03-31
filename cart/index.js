@@ -29,6 +29,12 @@ class Cart {
         this.productLineItems[productID].quantity += quantity;
     }
 
+    /**
+     * Validate the product ID and quantity before allowing it to be added to the cart.
+     *
+     * @param productID {string} - The product ID being added to the cart.
+     * @param quantit {number} - The quantity being added to the cart.
+     */
     validateItem (productID, quantity) {
         if (!this.productManager.getProduct(productID)) {
             throw Error(message.error.invalidID.replace('{ID}', productID));
