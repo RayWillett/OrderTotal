@@ -15,4 +15,8 @@ describe('The productLineItem module', () => {
     test('That productLineItem exists', () => {
         expect(productLineItem).toBeDefined();
     });
+
+    test('That productLineItem has a product property', () => {
+        expect(productLineItem.product).toBeDefined();
+    });
 });
