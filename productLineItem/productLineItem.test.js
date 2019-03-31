@@ -37,7 +37,7 @@ describe('The productLineItem module', () => {
         expect(productLineItem.addQuantity).toBeDefined();
         expect(typeof productLineItem.addQuantity).toBe('function');
     });
-});g
+});
 
 describe('The Quantity Validation', () => {
     test('That ProductLineItem does not accept an non-number quantity.', () => {
@@ -65,6 +65,15 @@ describe('The Quantity Validation', () => {
         expect(() => {
             productLineItem.addQuantity(1.4);
         }).toThrow();
+    });
+
+    test('That ProductLineItem does accept an fractional quantity for a divisible product type.', () => {
+        expect(() => {
+            let _productLineItem = new ProductLineItem(fractionalProductLineItem, 1.4);
+        }).not.toThrow();
+        expect(() => {
+            productLineItem.addQuantity(1.4);
+        }).not.toThrow();
     });
 });
 

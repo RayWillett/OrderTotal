@@ -2,7 +2,7 @@ const message = require('../util/message.json');
 
 const validateQuantity = (product, quantity) => {
     const isFractionalQuantity = !Number.isInteger(quantity);
-    if (isNaN(quantity) || 0 >= quantity || (isFractionalQuantity && !giproduct.isDivisibleUnit)) {
+    if (isNaN(quantity) || 0 >= quantity || (isFractionalQuantity && !product.isDivisibleUnit)) {
         throw Error(message.error.invalidQuantity.replace('{ID}', product.ID).replace('{quantity}', quantity));
     }
 };
