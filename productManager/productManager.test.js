@@ -31,6 +31,7 @@ describe('The catalog construction', () => {
 
         expect(_inventory.catalog).toEqual({
             [ID]: {
+                ID,
                 pricePerUnit,
                 isDivisibleUnit
             }
@@ -53,6 +54,7 @@ describe('The catalog construction', () => {
                 catalogRecord = _inventory.catalog[ID];
 
             expect(catalogRecord).toEqual({
+                ID,
                 pricePerUnit,
                 isDivisibleUnit
             });
@@ -91,6 +93,7 @@ describe('Product retrieval from the productManager', () => {
 
         expect(product).not.toBeNull();
         expect(product).toEqual({
+            ID,
             isDivisibleUnit,
             pricePerUnit
         });

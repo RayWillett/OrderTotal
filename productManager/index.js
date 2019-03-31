@@ -12,6 +12,7 @@ const appendProductToCatalog = (catalog, product) => {
         throw Error(message.error.duplicateProductID.replace('{ID}', ID));
     }
     catalog[ID] = {
+        ID,
         pricePerUnit,
         isDivisibleUnit
     }
