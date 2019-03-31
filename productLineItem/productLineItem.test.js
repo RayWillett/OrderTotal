@@ -18,9 +18,11 @@ describe('The productLineItem module', () => {
 
     test('That productLineItem has a product property', () => {
         expect(productLineItem.product).toBeDefined();
+        expect(typeof productLineItem.product).toBe('object');
     });
 
     test('That productLineItem has a quantity property', () => {
         expect(productLineItem.quantity).toBeDefined();
+        expect(typeof product.quantity).toBe('number');
     });
 });
