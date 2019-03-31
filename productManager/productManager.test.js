@@ -67,3 +67,21 @@ describe('The catalog construction', () => {
         }).toThrow();
     });
 });
+
+describe('Product retrieval from the productManager', () => {
+    let inventory,
+        testCatalogData = require('./catalog.test.json');
+
+    beforeEach(() => {
+        inventory = new ProductManager(testCatalogData.valid);
+    });
+
+    afterEach(() => {
+        inventory = null;
+    });
+
+    test('That ProductManager.getProduct exists', () => {
+        expect(inventory.getProduct).toBeDefined();
+        expect(typeof inventory.getProduct).toBe('function');
+    });
+})

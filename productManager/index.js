@@ -35,6 +35,21 @@ class ProductManager {
     _constructProductCatalog (products) {
         return products.reduce(appendProductToCatalog, {});
     }
+
+    /**
+     * Returns the product price and type of unit divisibility for a given product ID.
+     * If no product with the provided ID is found null is returned.
+     * 
+     * @param productID {string} - The product ID to search for.
+     * @returns {object} - the product definition or null.
+     */
+    getProduct (productID) {
+        let product = null;
+        if (this.catalog.hasOwnProperty(productID)) {
+            product = this.catalog[productID]
+        }
+        return product;
+    }
 }
 
 module.exports = ProductManager;
