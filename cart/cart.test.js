@@ -48,6 +48,32 @@ describe('The cart\'s properties', () => {
 });
 
 describe('The cart\'s AddItem method', () => {
+    jest.mock('../productLineItem');
+    
+    let productLineItemMockImpl = require('../productLineItem'),
+        constructorMock = jest.fn(),
+        mockGetProductFn = jest.fn(),
+        mockAddQuantityFn = jest.fn();
+
+    productLineItemMockImpl.mockImplementation(() => {
+        return {
+            constructor: constructorMock,
+            getPrice: mockGetProductFn,
+            addQuantity: mockAddQuantityFn
+        }
+    });
+
+    beforeEach(() => {
+        const productManagerMock = getMockedProductManager(() => true);
+
+        productLineItemMockImpl.mockClear();
+        constructorMock.mockClear();
+        mockGetProductFn.mockClear();
+        mockAddQuantityFn.mockClear();
+
+        cart = new Cart(productManagerMock, productLineItemMockImpl);
+    });
+
     test('That addItem is a function', () => {
         expect(cart.addItem).toBeDefined();
         expect(typeof cart.addItem).toBe('function');
@@ -59,11 +85,7 @@ describe('The cart\'s AddItem method', () => {
 
         expect(cart.productLineItems).toEqual({}); // ensure cart is empty
         cart.addItem(productID, quantity);
-        expect(cart.productLineItems).toEqual({
-            [productID]: {
-                quantity
-            }
-        });
+        expect(productLineItemMockImpl.mock.calls.length).toEqual(1);
     });
 
     test('That adding an already existing item to the cart increases the quantity', () => {
@@ -72,17 +94,8 @@ describe('The cart\'s AddItem method', () => {
 
         expect(cart.productLineItems).toEqual({}); // ensure cart is empty
         cart.addItem(productID, quantity);
-        expect(cart.productLineItems).toEqual({
-            [productID]: {
-                quantity
-            }
-        });
         cart.addItem(productID, 1);
-        expect(cart.productLineItems).toEqual({
-            [productID]: {
-                quantity: quantity + 1
-            }
-        });
+        expect(mockAddQuantityFn.mock.calls.length).toEqual(1);
     });
 
     test('That addItem can handle items with quantities that are not integers', () => {
@@ -91,41 +104,17 @@ describe('The cart\'s AddItem method', () => {
 
         expect(cart.productLineItems).toEqual({}); // ensure cart is empty
         cart.addItem(productID, quantity);
-        expect(cart.productLineItems).toEqual({
-            [productID]: {
-                quantity
-            }
-        });
+        expect(productLineItemMockImpl.mock.calls.length).toEqual(1);
     });
 
-    test('That adding an already existing item to the cart increases the non-integer qunaity', () => {
+    test('That adding an already existing item to the cart increases the non-integer quantity', () => {
         const productID = 'ground beef',
             quantity = 1.24;
 
         expect(cart.productLineItems).toEqual({}); // ensure cart is empty
         cart.addItem(productID, quantity);
-        expect(cart.productLineItems).toEqual({
-            [productID]: {
-                quantity
-            }
-        });
-        cart.addItem(productID, .57);
-        expect(cart.productLineItems).toEqual({
-            [productID]: {
-                quantity: quantity + .57
-            }
-        });
-    });
-
-    test('That addItem will not accept a quantity less than 0', () => {
-        const productID = 'can of soup',
-            quantity = -1;
-
-        expect(cart.productLineItems).toEqual({}); // ensure cart is empty
-        expect(() => {
-            cart.addItem(productID, quantity);
-        }).toThrow();
-        expect(cart.productLineItems).toEqual({}); // ensure cart is still empty
+        cart.addItem(productID, 1);
+        expect(mockAddQuantityFn.mock.calls.length).toEqual(1);
     });
 
     test('That addItem will not accept a product which is not defined in the catalog', () => {
@@ -153,17 +142,13 @@ describe('The cart\'s AddItem method', () => {
             return ['beef stew', 'toilet paper', 'marshmallows'].indexOf(productID) > -1;
         }));
 
-        const _cart = new Cart(mockedGetProduct);
+        const _cart = new Cart(mockedGetProduct, productLineItemMockImpl);
 
         expect(_cart.productLineItems).toEqual({}); // ensure cart is empty
         expect(() => {
             _cart.addItem(productID, quantity);
         }).not.toThrow();
-        expect(_cart.productLineItems).toEqual({
-            [productID]: {
-                quantity
-            }
-        });
+        expect(mockAddQuantityFn.mock.calls.length).toEqual(0);
     });
 });
 

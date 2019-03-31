@@ -6,10 +6,12 @@ class Cart {
      * 
      * @constructor
      * @param ProductManager {Object} - Object used to interact with the product catalog.
+     * @param productLineItemClass {Class} - Class to be used to wrap products in the cart.
      */
-    constructor (productManager) {
+    constructor (productManager, productLineItemClass) {
         this.productLineItems = {};
         this.productManager = productManager;
+        this.productLineItemClass = productLineItemClass;
     }
 
     /**
@@ -18,30 +20,25 @@ class Cart {
      * @param {number} quantity = The quantity of the product to be added to the cart.
      */
     addItem (productID, quantity) {
-        this.validateItem(productID, quantity);
+        this.validateItem(productID);
         // If the productID isn't already in the cart, create a new line item wrapper for it.
         if (!this.productLineItems.hasOwnProperty(productID)) {
-            this.productLineItems[productID] = {
-                quantity: 0
-            };
+            let product = this.productManager.getProduct(productID);
+            this.productLineItems[productID] = new this.productLineItemClass(product, quantity);
+        } else {
+            // Increase line item quantity
+            this.productLineItems[productID].addQuantity(quantity);
         }
-        // Increase line item quantity
-        this.productLineItems[productID].quantity += quantity;
     }
 
     /**
      * Validate the product ID and quantity before allowing it to be added to the cart.
      *
      * @param productID {string} - The product ID being added to the cart.
-     * @param quantit {number} - The quantity being added to the cart.
      */
-    validateItem (productID, quantity) {
+    validateItem (productID) {
         if (!this.productManager.getProduct(productID)) {
             throw Error(message.error.invalidID.replace('{ID}', productID));
-        }
-        // TODO: that quantity matches the type of item e.g. a can of soup cannot have a quantity of 0.5
-        if (isNaN(quantity) || 0 >= quantity) {
-            throw Error(message.error.invalidQuantity.replace('{ID}', productID).replace('{quantity}', quantity));
         }
     }
 
