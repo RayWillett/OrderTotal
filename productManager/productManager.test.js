@@ -58,4 +58,12 @@ describe('The catalog construction', () => {
             });
         });
     });
+
+    test('That an error will be thrown when a duplicate product ID is defined.', () => {
+        let testProducts = testCatalogData.duplicated;
+
+        expect(() => {
+            let _inventory = new ProductManager(testProducts);
+        }).toThrow();
+    });
 });
