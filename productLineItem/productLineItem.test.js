@@ -1,10 +1,10 @@
 const ProductLineItem = require('./index.js');
 
-let productLineItem;
+let productLineItem, productDefinition;
 
 beforeEach(() => {
-    let product = require('./product.test.json')[0];
-    productLineItem = new ProductLineItem(product, 1);
+    productDefinition = require('./product.test.json')[0];
+    productLineItem = new ProductLineItem(productDefinition, 1);
 });
 
 afterEach(() => {
@@ -24,5 +24,10 @@ describe('The productLineItem module', () => {
     test('That productLineItem has a quantity property', () => {
         expect(productLineItem.quantity).toBeDefined();
         expect(typeof productLineItem.quantity).toBe('number');
+    });
+
+    test('That productLineItem has a getPrice method', () => {
+        expect(productLineItem.getPrice).toBeDefined();
+        expect(typeof productLineItem.getPrice).toBe('function');
     });
 });

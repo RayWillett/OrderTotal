@@ -10,6 +10,15 @@ class ProductLineItem {
         this.product = product;
         this.quantity = quantity;
      }
+
+     /**
+      * Returns the price of the productLineItem.
+      *
+      * @returns {number}
+      */
+      getPrice () {
+        return this.product.pricePerUnit * this.quantity;
+      }
 }
 
 module.exports = ProductLineItem;
