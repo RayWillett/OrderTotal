@@ -84,4 +84,15 @@ describe('Product retrieval from the productManager', () => {
         expect(inventory.getProduct).toBeDefined();
         expect(typeof inventory.getProduct).toBe('function');
     });
+
+    test('That a product will be returned from the ProductManager if it exists in the catalog.', () => {
+        const { ID, isDivisibleUnit, pricePerUnit } = testCatalogData.valid[0],
+            product = inventory.getProduct(ID);
+
+        expect(product).not.toBeNull();
+        expect(product).toEqual({
+            isDivisibleUnit,
+            pricePerUnit
+        });
+    });
 })
