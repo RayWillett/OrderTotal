@@ -37,24 +37,33 @@ describe('The productLineItem module', () => {
         expect(productLineItem.addQuantity).toBeDefined();
         expect(typeof productLineItem.addQuantity).toBe('function');
     });
-});
+});g
 
 describe('The Quantity Validation', () => {
-    test('That ProductLineItem constructor does not accept an non-number quantity.', () => {
+    test('That ProductLineItem does not accept an non-number quantity.', () => {
         expect(() => {
             let _productLineItem = new ProductLineItem(productLineItem, "asdf");
         }).toThrow();
-    });
-
-    test('That ProductLineItem constructor does not accept an negative number quantity.', () => {
         expect(() => {
-            let _productLineItem = new ProductLineItem(productLineItem, -1);
+            productLineItem.addQuantity('asdfs');
         }).toThrow();
     });
 
-    test('That ProductLineItem constructor does not accept an fractional quantity for a non-divisible product type.', () => {
+    test('That ProductLineItem does not accept an negative number quantity.', () => {
+        expect(() => {
+            let _productLineItem = new ProductLineItem(productLineItem, -1);
+        }).toThrow();
+        expect(() => {
+            productLineItem.addQuantity(-1);
+        }).toThrow();
+    });
+
+    test('That ProductLineItem does not accept an fractional quantity for a non-divisible product type.', () => {
         expect(() => {
             let _productLineItem = new ProductLineItem(fractionalProductLineItem, 1.4);
+        }).toThrow();
+        expect(() => {
+            productLineItem.addQuantity(1.4);
         }).toThrow();
     });
 });
@@ -66,7 +75,7 @@ describe('The productLineItem getPrice method', () => {
 });
 
 
-describe('The productLineItem addMethod method', () => {
+describe('The productLineItem addQuantity method', () => {
     test('That addQuantity increases the quantity of a product.', () => {
         expect(productLineItem.quantity).toEqual(1);
         productLineItem.addQuantity(1);
