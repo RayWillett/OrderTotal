@@ -43,36 +43,37 @@ describe('The Quantity Validation', () => {
     test('That ProductLineItem does not accept an non-number quantity.', () => {
         expect(() => {
             let _productLineItem = new ProductLineItem(productLineItem, "asdf");
-        }).toThrow();
+        }).toThrow(/invalid quantity/gi);
         expect(() => {
             productLineItem.addQuantity('asdfs');
-        }).toThrow();
+        }).toThrow(/invalid quantity/gi);
     });
 
     test('That ProductLineItem does not accept an negative number quantity.', () => {
         expect(() => {
             let _productLineItem = new ProductLineItem(productLineItem, -1);
-        }).toThrow();
+        }).toThrow(/invalid quantity/gi);
         expect(() => {
             productLineItem.addQuantity(-1);
-        }).toThrow();
+        }).toThrow(/invalid quantity/gi);
     });
 
     test('That ProductLineItem does not accept an fractional quantity for a non-divisible product type.', () => {
         expect(() => {
-            let _productLineItem = new ProductLineItem(fractionalProductLineItem, 1.4);
-        }).toThrow();
+            let _productLineItem = new ProductLineItem(productDefinition, 1.4);
+        }).toThrow(/invalid quantity/gi);
         expect(() => {
             productLineItem.addQuantity(1.4);
-        }).toThrow();
+        }).toThrow(/invalid quantity/gi);
     });
 
     test('That ProductLineItem does accept an fractional quantity for a divisible product type.', () => {
+        let _productLineItem;
         expect(() => {
-            let _productLineItem = new ProductLineItem(fractionalProductLineItem, 1.4);
+            _productLineItem = new ProductLineItem(fractionalProductLineItem, 1.4);
         }).not.toThrow();
         expect(() => {
-            productLineItem.addQuantity(1.4);
+            _productLineItem.addQuantity(1.4);
         }).not.toThrow();
     });
 });
