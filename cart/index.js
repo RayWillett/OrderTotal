@@ -1,6 +1,9 @@
+const message = require('../util/message.json');
+
 class Cart {
     /**
      * Represents the  cart object.
+     * 
      * @constructor
      */
     constructor () {
@@ -13,6 +16,7 @@ class Cart {
      * @param {number} quantity = The quantity of the product to be added to the cart.
      */
     addItem (productID, quantity) {
+        this.validateItem(productID, quantity);
         // If the productID isn't already in the cart, create a new line item wrapper for it.
         if (!this.productLineItems.hasOwnProperty(productID)) {
             this.productLineItems[productID] = {
@@ -21,6 +25,12 @@ class Cart {
         }
         // Increase line item quantity
         this.productLineItems[productID].quantity += quantity;
+    }
+
+    validateItem (productID, quantity) {
+        if (isNaN(quantity) || 0 >= quantity) {
+            throw Error(message.error.invalidQuantity.replace('{ID}', productID).replace('{quantity}', quantity));
+        }
     }
 
     /**

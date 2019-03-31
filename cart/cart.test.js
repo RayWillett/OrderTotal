@@ -95,6 +95,17 @@ describe('The cart\'s AddItem method', () => {
             }
         });
     });
+
+    test('That addItem will not accept a quantity less than 0', () => {
+        const productID = 'can of soup',
+            quantity = -1;
+
+        expect(cart.productLineItems).toEqual({}); // ensure cart is empty
+        expect(() => {
+            cart.addItem(productID, quantity);
+        }).toThrow();
+        expect(cart.productLineItems).toEqual({}); // ensure cart is still empty
+    });
 });
 
 
