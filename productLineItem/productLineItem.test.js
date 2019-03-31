@@ -47,3 +47,12 @@ describe('The productLineItem getPrice method', () => {
         expect(productLineItem.getPrice()).toEqual(0);
     });
 });
+
+
+describe('The productLineItem addMethod method', () => {
+    test('That addQuantity increases the quantity of a product.', () => {
+        expect(productLineItem.quantity).toEqual(1);
+        productLineItem.addQuantity(1);
+        expect(productLineItem.quantity).toEqual(2);
+    });
+});
