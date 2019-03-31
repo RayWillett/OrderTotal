@@ -18,24 +18,6 @@ describe('The productLineItem module', () => {
         expect(productLineItem).toBeDefined();
     });
 
-    test('That ProductLineItem constructor does not accept an non-number quantity.', () => {
-        expect(() => {
-            productLineItem = new ProductLineItem(productLineItem, "asdf");
-        }).toThrow();
-    });
-
-    test('That ProductLineItem constructor does not accept an negative number quantity.', () => {
-        expect(() => {
-            productLineItem = new ProductLineItem(productLineItem, -1);
-        }).toThrow();
-    });
-    
-    test('That ProductLineItem constructor does not accept an fractional quantity for a non-divisible product type.', () => {
-        expect(() => {
-            productLineItem = new ProductLineItem(fractionalProductLineItem, 1.4);
-        }).toThrow();
-    });
-
     test('That productLineItem has a product property', () => {
         expect(productLineItem.product).toBeDefined();
         expect(typeof productLineItem.product).toBe('object');
@@ -54,6 +36,26 @@ describe('The productLineItem module', () => {
     test('That productLineItem has an addQuantity method', () => {
         expect(productLineItem.addQuantity).toBeDefined();
         expect(typeof productLineItem.addQuantity).toBe('function');
+    });
+});
+
+describe('The Quantity Validation', () => {
+    test('That ProductLineItem constructor does not accept an non-number quantity.', () => {
+        expect(() => {
+            let _productLineItem = new ProductLineItem(productLineItem, "asdf");
+        }).toThrow();
+    });
+
+    test('That ProductLineItem constructor does not accept an negative number quantity.', () => {
+        expect(() => {
+            let _productLineItem = new ProductLineItem(productLineItem, -1);
+        }).toThrow();
+    });
+
+    test('That ProductLineItem constructor does not accept an fractional quantity for a non-divisible product type.', () => {
+        expect(() => {
+            let _productLineItem = new ProductLineItem(fractionalProductLineItem, 1.4);
+        }).toThrow();
     });
 });
 
