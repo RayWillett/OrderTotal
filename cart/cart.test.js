@@ -2,8 +2,23 @@ const Cart = require('./index');
 
 let cart;
 
+function getMockedProductManager (getProductDefinition) {
+    jest.mock('../productManager');
+
+    const productManager = require('../productManager'),
+        mockFn = jest.fn(getProductDefinition);
+
+    productManager.mockImplementation(() => {
+        return {
+            getProduct: mockFn
+        }
+    });
+    return productManager();
+}
+
 beforeEach(() => {
-    cart = new Cart();
+    const productManagerMock = getMockedProductManager(() => true);
+    cart = new Cart(productManagerMock);
 });
 
 afterEach(() => {

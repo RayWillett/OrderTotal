@@ -5,9 +5,11 @@ class Cart {
      * Represents the  cart object.
      * 
      * @constructor
+     * @param ProductManager {Object} - Object used to interact with the product catalog.
      */
-    constructor () {
+    constructor (productManager) {
         this.productLineItems = {};
+        this.productManager = productManager;
     }
 
     /**
