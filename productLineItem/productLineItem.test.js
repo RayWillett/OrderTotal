@@ -31,3 +31,9 @@ describe('The productLineItem module', () => {
         expect(typeof productLineItem.getPrice).toBe('function');
     });
 });
+
+describe('The productLineItem getPrice method', () => {
+    test('That a productLineItem with 1 quantity has a price equal to the product definition\'s price', () => {
+        expect(productLineItem.getPrice()).toEqual(productDefinition.pricePerUnit);
+    });
+});
