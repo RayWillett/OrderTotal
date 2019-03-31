@@ -1,3 +1,5 @@
+const message = require('../util/message.json');
+
 /**
  * A Helper function which appends a product object to a catalog object.
  *
@@ -7,7 +9,7 @@
 const appendProductToCatalog = (catalog, product) => {
     const { ID, pricePerUnit, isDivisibleUnit } = product;
     if (catalog.hasOwnProperty(ID)) {
-        throw Error(`Product with ID {ID} is defined more than once.`);
+        throw Error(message.error.duplicateProductID.replace('{ID}', ID));
     }
     catalog[ID] = {
         pricePerUnit,
