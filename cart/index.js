@@ -46,7 +46,15 @@ class Cart {
      * @returns {number} - The pretax total of the items in the cart.
      */
     getPretaxTotal () {
-        return 0;
+        return Object.keys(this.productLineItems).reduce((totalPrice, productID) => {
+            const productLineItem = this.productLineItems[productID];
+
+            /* Passing the Product ID in at this point makes it easier to mock the ProductLineItem class in the test suite.
+             * I think that if I were more familiar with the framework I would be more comfortable creating the Mocked
+             * implementation without having to rely on this workaround.
+             */
+            return (totalPrice + productLineItem.getPrice(productID));
+        }, 0);
     }
 }
 

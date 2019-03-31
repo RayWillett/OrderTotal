@@ -1,0 +1,32 @@
+{
+    "ground beef": {
+        "ID": "ground beef",
+        "pricePerUnit": 1.99,
+        "isDivisibleUnit": true,
+        "quantity": 1
+    },
+    "soup": {
+        "ID": "soup",
+        "pricePerUnit": 0.98,
+        "isDivisibleUnit": false,
+        "quantity": 1
+    },
+    "salmon": {
+        "ID": "salmon",
+        "pricePerUnit": 6.98,
+        "isDivisibleUnit": true,
+        "quantity": 1
+    },
+    "talapia": {
+        "ID": "talapia",
+        "pricePerUnit": 12.99,
+        "isDivisibleUnit": false,
+        "quantity": 1
+    },
+    "12 pack of toilet paper": {
+        "ID": "12 pack of toilet paper",
+        "pricePerUnit": 5.99,
+        "isDivisibleUnit": false,
+        "quantity": 1
+    }
+}

@@ -163,4 +163,38 @@ describe('The cart\'s getPretaxTotal method', () => {
         const pretaxTotal = cart.getPretaxTotal();
         expect(pretaxTotal).toBe(0);
     });
+
+    test('That a the cart pretax total will match the sum of product price times it\'s quantity', () => {
+        jest.mock('../productLineItem');
+
+        const catalogData = require('./catalog.test.json'),
+            mockedGetProduct = getMockedProductManager((productID => {
+                return catalogData[productID];
+            })),
+            productLineItemMockImpl = require('../productLineItem'),
+            constructorMock = jest.fn(),
+            mockAddQuantityFn = jest.fn(),
+            mockGetPriceFn = jest.fn(productID => catalogData[productID].pricePerUnit * catalogData[productID].quantity);
+
+        productLineItemMockImpl.mockImplementation(() => {
+            return {
+                constructor: constructorMock,
+                getPrice: mockGetPriceFn,
+                addQuantity: mockAddQuantityFn
+            }
+        });
+
+        const _cart = new Cart(mockedGetProduct, productLineItemMockImpl);
+
+        let expectedTotal = 0;
+
+        Object.keys(catalogData).forEach(productID => {
+            _cart.addItem(productID, catalogData[productID].quantity);
+
+            const pretaxTotal = _cart.getPretaxTotal();
+            expectedTotal += (catalogData[productID].pricePerUnit * catalogData[productID].quantity);
+
+            expect(pretaxTotal).toBe(expectedTotal);
+        });
+    });
 });
