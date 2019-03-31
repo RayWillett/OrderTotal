@@ -24,6 +24,12 @@ describe('The productLineItem module', () => {
         }).toThrow();
     });
 
+    test('That ProductLineItem constructor does not accept an negative number quantity.', () => {
+        expect(() => {
+            productLineItem = new ProductLineItem(productLineItem, -1);
+        }).toThrow();
+    });
+
     test('That productLineItem has a product property', () => {
         expect(productLineItem.product).toBeDefined();
         expect(typeof productLineItem.product).toBe('object');
