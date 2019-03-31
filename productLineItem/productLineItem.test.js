@@ -29,6 +29,12 @@ describe('The productLineItem module', () => {
             productLineItem = new ProductLineItem(productLineItem, -1);
         }).toThrow();
     });
+    
+    test('That ProductLineItem constructor does not accept an fractional quantity for a non-divisible product type.', () => {
+        expect(() => {
+            productLineItem = new ProductLineItem(fractionalProductLineItem, 1.4);
+        }).toThrow();
+    });
 
     test('That productLineItem has a product property', () => {
         expect(productLineItem.product).toBeDefined();
