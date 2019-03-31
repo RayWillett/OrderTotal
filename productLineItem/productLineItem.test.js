@@ -30,6 +30,11 @@ describe('The productLineItem module', () => {
         expect(productLineItem.getPrice).toBeDefined();
         expect(typeof productLineItem.getPrice).toBe('function');
     });
+
+    test('That productLineItem has an addQuantity method', () => {
+        expect(productLineItem.addQuantity).toBeDefined();
+        expect(typeof productLineItem.addQuantity).toBe('function');
+    });
 });
 
 describe('The productLineItem getPrice method', () => {

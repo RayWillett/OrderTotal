@@ -19,6 +19,16 @@ class ProductLineItem {
       getPrice () {
         return this.product.pricePerUnit * this.quantity;
       }
+
+      /**
+       * Increases the quantity of the product by a given amount.
+       *
+       * @param increaseBy {number} the amount to increase the quantity by
+       */
+      addQuantity (increaseBy) {
+        //TODO: Add validation here.
+        this.quantity += increaseBy;
+      }
 }
 
 module.exports = ProductLineItem;
