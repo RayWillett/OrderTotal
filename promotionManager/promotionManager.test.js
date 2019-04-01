@@ -37,4 +37,9 @@ describe('The getApplicablePromotions method', () => {
         expect(availablePromotion).toBeInstanceOf(Object);
         expect(availablePromotion).toEqual(promotion);
     });
+
+    test('That it returns undefined when passed a productID matching no promotions', () => {
+        const availablePromotion = promotionManager.getApplicablePromotions('fake product');
+        expect(availablePromotion).not.toBeDefined();
+    });
 });
