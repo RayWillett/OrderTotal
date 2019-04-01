@@ -18,6 +18,16 @@ class PromotionManager {
      getApplicablePromotions (listOfProducts) {
         return [];
      }
+
+     /**
+      * Returns an available promotion for the given product ID, or undefined if none are found.
+      *
+      * @param productID {string} - the product ID to search promotions for.
+      * @returns {object} - the product's promotion or undefined.
+      */
+     getProductPromotion (productID) {
+        return this.availablePromotions.find( promotion => promotion.buy.ID == productID );
+     }
 }
 
 module.exports = PromotionManager;
