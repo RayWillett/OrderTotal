@@ -20,13 +20,13 @@ class PromotionManager {
      }
 
      /**
-      * Returns an available promotion for the given product ID, or undefined if none are found.
+      * Returns an available promotion for the given product ID or and empty array if none are found.
       *
       * @param productID {string} - the product ID to search promotions for.
-      * @returns {object} - the product's promotion or undefined.
+      * @returns {array} - the product's promotions or an empty array.
       */
      getProductPromotion (productID) {
-        return this.availablePromotions.find( promotion => promotion.buy.ID == productID );
+        return this.availablePromotions.filter( promotion => promotion.buy.ID == productID );
      }
 }
 
