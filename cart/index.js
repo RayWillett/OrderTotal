@@ -43,6 +43,8 @@ class Cart {
     }
 
     /**
+     * Get the pretax total cost of all items in the cart, after applying discounts.
+     *
      * @returns {number} - The pretax total of the items in the cart.
      */
     getPretaxTotal () {
