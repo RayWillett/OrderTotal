@@ -82,6 +82,14 @@ describe('The productLineItem getPrice method', () => {
     test('That a productLineItem with 1 quantity has a price equal to the product definition\'s price', () => {
         expect(productLineItem.getPrice()).toEqual(productDefinition.pricePerUnit);
     });
+
+    test('That a productLineItem with X quantity has a price equal to the product definition\'s price time X', () => {
+        let quantity = 2,
+            _productLineItem = new ProductLineItem(productDefinition, quantity);
+        expect(_productLineItem.getPrice()).toEqual(productDefinition.pricePerUnit * quantity);
+        _productLineItem.addQuantity(1);
+        expect(_productLineItem.getPrice()).toEqual(productDefinition.pricePerUnit * (quantity + 1));
+    });
 });
 
 
