@@ -43,3 +43,14 @@ describe('The getApplicablePromotions method', () => {
         expect(availablePromotion).not.toBeDefined();
     });
 });
+
+
+describe('The getMarkdownAmount method', () => {
+    test('That it returns 0 if the quantity is 0', () => {
+        const quantity = 0,
+            promotion = promoData.promotions[0],
+            markdownAmount = promotionManager.getMarkdownAmount(promotion, quantity);
+
+        expect(markdownAmount).toBe(0);
+    })
+});
