@@ -1,12 +1,38 @@
 [
     {
-        "ID": "test",
+        "ID": "markdown0",
         "buy": {
             "ID": "pasta",
             "quantity": 1
         },
         "get": {
             "ID": "sauce",
+            "quantity": 1
+        },
+        "perentOff": 0.25,
+        "limit": 1
+    },
+    {
+        "ID": "markdown1",
+        "buy": {
+            "ID": "squash",
+            "quantity": 1
+        },
+        "get": {
+            "ID": "squash",
+            "quantity": 1
+        },
+        "perentOff": 0.25,
+        "limit": 1
+    },
+    {
+        "ID": "markdown2",
+        "buy": {
+            "ID": "squash",
+            "quantity": 1
+        },
+        "get": {
+            "ID": "potato",
             "quantity": 1
         },
         "perentOff": 0.25,
