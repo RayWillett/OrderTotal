@@ -27,3 +27,14 @@ describe('The PromotionManager class', () => {
         expect(typeof promotionManager.getApplicablePromotions).toBe('function');
     });
 });
+
+describe('The getApplicablePromotions method', () => {
+    test('That it returns a promotion object that can be applied to a given product', () => {
+        const promotion = promoData.promotions[0],
+            availablePromotion = promotionManager.getApplicablePromotions(promotion.productID);
+
+        expect(availablePromotion).toBeDefined();
+        expect(availablePromotion).toBeInstanceOf(Object);
+        expect(availablePromotion).toEqual(promotion);
+    });
+});
