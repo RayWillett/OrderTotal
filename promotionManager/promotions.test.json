@@ -1,41 +1,28 @@
-[
-    {
-        "ID": "markdown0",
-        "buy": {
-            "ID": "pasta",
-            "quantity": 1
+{
+    "legalTypes": ["markdown", "bundle", "buyXgetY", "buyNgeM_weighted"],
+    "promotions": [
+        {
+            "type": "markdown",
+            "productID": "soup",
+            "discountAmount": 0.5
         },
-        "get": {
-            "ID": "sauce",
-            "quantity": 1
+        {
+            "type": "bundle",
+            "productID": "toilet paper",
+            "quantity": 3,
+            "newPrice": 5.00
         },
-        "perentOff": 0.25,
-        "limit": 1
-    },
-    {
-        "ID": "markdown1",
-        "buy": {
-            "ID": "squash",
-            "quantity": 1
+        {
+            "type": "buyXgetY",
+            "productID": "toilet paper",
+            "buy": 1,
+            "get": 1,
+            "percentOff": 0.5
         },
-        "get": {
-            "ID": "squash",
-            "quantity": 1
-        },
-        "perentOff": 0.25,
-        "limit": 1
-    },
-    {
-        "ID": "markdown2",
-        "buy": {
-            "ID": "squash",
-            "quantity": 1
-        },
-        "get": {
-            "ID": "potato",
-            "quantity": 1
-        },
-        "perentOff": 0.25,
-        "limit": 1
-    }
-]
+        {
+            "type": "buyNgeM_weighted",
+            "productID": "beef",
+            "percentOff": 0.25
+        }
+    ]
+}

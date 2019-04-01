@@ -4,7 +4,7 @@ const promoData = require('./promotions.test.json');
 let promotionManager;
 
 beforeEach(() => {
-    promotionManager = new PromotionManager(promoData);
+    promotionManager = new PromotionManager(promoData.promotions);
 });
 
 afterEach(() => {
