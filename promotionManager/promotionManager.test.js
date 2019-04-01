@@ -21,4 +21,9 @@ describe('The PromotionManager class', () => {
         expect(promotionManager.availablePromotions).toBeDefined();
         expect(promotionManager.availablePromotions).toBeInstanceOf(Array);
     });
+
+    test('That getApplicablePromotions exists', () => {
+        expect(promotionManager.getApplicablePromotions).toBeDefined();
+        expect(typeof promotionManager.getApplicablePromotions).toBe('function');
+    });
 });
