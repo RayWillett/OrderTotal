@@ -16,4 +16,9 @@ describe('The PromotionManager class', () => {
         expect(promotionManager).toBeDefined();
         expect(typeof promotionManager).toBe('object');
     });
+
+    test('That the availablePromotions exists', () => {
+        expect(promotionManager.availablePromotions).toBeDefined();
+        expect(promotionManager.availablePromotions).toBeInstanceOf(Array);
+    });
 });

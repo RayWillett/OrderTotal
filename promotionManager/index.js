@@ -6,7 +6,7 @@ class PromotionManager {
      * @param availablePromotions {array} - list of possible/available promtions.
      */
     constructor (availablePromotions) {
-        this.availablePromotions;
+        this.availablePromotions = availablePromotions;
     }
 }
 
