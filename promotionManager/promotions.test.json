@@ -2,11 +2,11 @@
     {
         "ID": "test",
         "buy": {
-            "ID": "x",
+            "ID": "pasta",
             "quantity": 1
         },
         "get": {
-            "ID": "y",
+            "ID": "sauce",
             "quantity": 1
         },
         "perentOff": 0.25,

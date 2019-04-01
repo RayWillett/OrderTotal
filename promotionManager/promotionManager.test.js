@@ -39,4 +39,11 @@ describe('The getProductPromotion method', () => {
         const productPromotion = promotionManager.getProductPromotion(fakeProductID);
         expect(productPromotion).not.toBeDefined();
     });
+
+    test('That a valid product ID results in a promotion', () => {
+        const existingProductID = promoData[0].buy.ID;
+        const productPromotion = promotionManager.getProductPromotion(existingProductID);
+        expect(productPromotion).toBeDefined();
+        expect(productPromotion).toEqual(promoData[0]);
+    });
 });
