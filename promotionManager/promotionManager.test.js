@@ -32,3 +32,11 @@ describe('The PromotionManager class', () => {
         expect(typeof promotionManager.getProductPromotion).toBe('function');
     });
 });
+
+describe('The getProductPromotion method', () => {
+    test('That an invalid product ID results in an undefined promotion', () => {
+        const fakeProductID = 'fake product';
+        const productPromotion = promotionManager.getProductPromotion(fakeProductID);
+        expect(productPromotion).not.toBeDefined();
+    });
+});
