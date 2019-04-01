@@ -1,0 +1,19 @@
+const PromotionManager = require('./index');
+const promoData = require('./promotions.test.json');
+
+let promotionManager;
+
+beforeEach(() => {
+    promotionManager = new PromotionManager(promoData);
+});
+
+afterEach(() => {
+    promotionManager = null;
+});
+
+describe('The PromotionManager class', () => {
+    test('That promotionManager is defined', () => {
+        expect(promotionManager).toBeDefined();
+        expect(typeof promotionManager).toBe('object');
+    });
+});

@@ -1,0 +1,15 @@
+[
+    {
+        "ID": "test",
+        "buy": {
+            "ID": "x",
+            "quantity": 1
+        },
+        "get": {
+            "ID": "y",
+            "quantity": 1
+        },
+        "perentOff": 0.25,
+        "limit": 1
+    }
+]
