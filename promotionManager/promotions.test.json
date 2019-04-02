@@ -4,13 +4,9 @@
         {
             "type": "markdown",
             "productID": "soup",
-            "discountAmount": 0.5
-        },
-        {
-            "type": "bundle",
-            "productID": "toilet paper",
-            "quantity": 3,
-            "newPrice": 5.00
+            "buy": 0,
+            "get": 1,
+            "percentOff": 0.5
         },
         {
             "type": "buyXgetY",
@@ -18,6 +14,12 @@
             "buy": 1,
             "get": 1,
             "percentOff": 0.5
+        },
+        {
+            "type": "bundle",
+            "productID": "toilet paper",
+            "quantity": 3,
+            "newPrice": 5.00
         },
         {
             "type": "buyNgeM_weighted",

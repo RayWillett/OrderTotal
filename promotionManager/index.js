@@ -22,14 +22,19 @@ class PromotionManager {
      /**
       * Calculates the discount amount for a single ProductLineItem in the cart.
       *
-      * @param promotion {object} - the promotion to get the discount amount of
-      * @param quantity {number} - The quantity of the item in the cart
-      * @returns {number} the discount amount for this ProductLineItem
+      * @param promotion {object} - the promotion to get the discount amount of.
+      * @param quantity {number} - The quantity of the item in the cart.
+      * @param productPrice {number} - The undiscounted price of the item.
+      * @returns {number} the discount amount for this ProductLineItem.
       */
-     getMarkdownAmount (promotion, quantity) {
+     getMarkdownAmount (promotion, quantity, productPrice) {
         let totalMarkdownAmount = 0,
             _quantity = quantity,
             _bought, _gotten;
+
+         //TODO: This calculation should be pulled off into it's own function
+        const markdownAmount = (productPrice * promotion.percentOff),
+            shouldCheckBoughtAmount = (promotion.buy > 0);
 
         // While there are still items that may qualify for a discount
         while (_quantity > 0) {
@@ -38,11 +43,15 @@ class PromotionManager {
             _gotten = 0;
 
             // Remove items which may trigger the discount
-            while ((_quantity-- > 0) && (_bought++ <= promotion.buy)) {
+            while (shouldCheckBoughtAmount && (_bought <= promotion.buy) && (_quantity > 0)) {
+                _quantity--;
+                _bought++;
                 totalMarkdownAmount += 0; // These items are not discounted. Adding 0 to help document intent.
             }
 
-            while ((_quantity > 0) && (_gotten++ <= promotion.get)) {
+            while ((_quantity > 0) && (_gotten <= promotion.get)) {
+                _quantity--;
+                _gotten++;
                 totalMarkdownAmount += markdownAmount;
             }
         }
