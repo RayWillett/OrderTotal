@@ -111,49 +111,49 @@ describe('The getDiscountAmount method', () => {
             expect(markdownAmount).toBe(expectedDiscountAmount);
         });
     });
+});
 
-    describe('The limit property of a promotion', () => {
-        test('That it returns half of the productLineItem\'s total price (up to X) if the promotion is a markdown of 50% limit X', () => {
-            const productPrice = 5.00,
-                promotion = promoData.limitedPromotions[0],
-                quantitiesToTest = [1,2,3,4,5,6,7,9,10];
+describe('The limit property of a promotion', () => {
+    test('That it returns half of the productLineItem\'s total price (up to X) if the promotion is a markdown of 50% limit X', () => {
+        const productPrice = 5.00,
+            promotion = promoData.limitedPromotions[0],
+            quantitiesToTest = [1,2,3,4,5,6,7,9,10];
 
-            quantitiesToTest.forEach(quantity => {
-                const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
-                    expectedDiscountAmount = (promotion.percentOff * productPrice * Math.min(quantity, promotion.limit));
+        quantitiesToTest.forEach(quantity => {
+            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
+                expectedDiscountAmount = (promotion.percentOff * productPrice * Math.min(quantity, promotion.limit));
 
-                expect(markdownAmount).toBe(expectedDiscountAmount);
-            });
+            expect(markdownAmount).toBe(expectedDiscountAmount);
         });
+    });
 
-        test('That it returns the correct discount to the products\'s price if the promotion is a "Buy One Get One for 50% off limit X"', () => {
-            const productPrice = 5.00,
-                promotion = promoData.limitedPromotions[1],
-                quantitiesToTest = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    test('That it returns the correct discount to the products\'s price if the promotion is a "Buy One Get One for 50% off limit X"', () => {
+        const productPrice = 5.00,
+            promotion = promoData.limitedPromotions[1],
+            quantitiesToTest = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-            quantitiesToTest.forEach(quantity => {
-                const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
-                    applyTo = Math.min(quantity, promotion.limit);
-                    expectedDiscountAmount = (promotion.percentOff * productPrice * Math.floor(applyTo / (promotion.buy + promotion.get)));
+        quantitiesToTest.forEach(quantity => {
+            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
+                applyTo = Math.min(quantity, promotion.limit);
+                expectedDiscountAmount = (promotion.percentOff * productPrice * Math.floor(applyTo / (promotion.buy + promotion.get)));
 
-                expect(markdownAmount).toBe(expectedDiscountAmount);
-            });
+            expect(markdownAmount).toBe(expectedDiscountAmount);
         });
+    });
 
-        test('That it returns the correct discount to the products\'s price if the promotion is a "3 for $5 limit X" type', () => {
-            const productPrice = 8.00,
-                promotion = promoData.limitedPromotions[2],
-                quantitiesToTest = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    test('That it returns the correct discount to the products\'s price if the promotion is a "3 for $5 limit X" type', () => {
+        const productPrice = 8.00,
+            promotion = promoData.limitedPromotions[2],
+            quantitiesToTest = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-            quantitiesToTest.forEach(quantity => {
-                const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
-                    appliedTo = Math.min(quantity, promotion.limit),
-                    bundledProducts = Math.floor(appliedTo / promotion.quantityNeeded),
-                    remainingProducts = (appliedTo % promotion.quantityNeeded) + (quantity - appliedTo),
-                    expectedDiscountAmount = (productPrice * quantity) - ((promotion.newPrice * bundledProducts) + (remainingProducts * productPrice));
+        quantitiesToTest.forEach(quantity => {
+            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
+                appliedTo = Math.min(quantity, promotion.limit),
+                bundledProducts = Math.floor(appliedTo / promotion.quantityNeeded),
+                remainingProducts = (appliedTo % promotion.quantityNeeded) + (quantity - appliedTo),
+                expectedDiscountAmount = (productPrice * quantity) - ((promotion.newPrice * bundledProducts) + (remainingProducts * productPrice));
 
-                expect(markdownAmount).toBe(expectedDiscountAmount);
-            });
+            expect(markdownAmount).toBe(expectedDiscountAmount);
         });
     });
 });
