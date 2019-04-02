@@ -55,12 +55,16 @@ describe('The getMarkdownAmount method', () => {
         expect(markdownAmount).toBe(0);
     });
 
-    test('That it returns half of the product\'s price if the promotion is a markdown of 50%', () => {
-        const quantity = 1,
-            productPrice = 5.00,
+    test('That it returns half of the productLineItem\'s total price if the promotion is a markdown of 50%', () => {
+        const productPrice = 5.00,
             promotion = promoData.promotions[0],
-            markdownAmount = promotionManager.getMarkdownAmount(promotion, quantity, productPrice);
+            quantitiesToTest = [1,2,3,4,5,6,7,9,10];
 
-        expect(markdownAmount).toBe(promotion.percentOff * productPrice);
+            quantitiesToTest.forEach(quantity => {
+                const markdownAmount = promotionManager.getMarkdownAmount(promotion, quantity, productPrice),
+                    expectedDiscountAmount = (promotion.percentOff * productPrice * quantity);
+
+                expect(markdownAmount).toBe(expectedDiscountAmount);
+            });
     });
 });
