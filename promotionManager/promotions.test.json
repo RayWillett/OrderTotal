@@ -268,7 +268,64 @@
             "productID": "toilet paper",
             "quantityNeeded": 3,
             "newPrice": 5.00,
-            "limit": 6
+            "limit": 6,
+            "test": {
+                "data": [
+                    {
+                        "quantity": 1,
+                        "expectedDiscountAmount": 0
+                    },
+                    {
+                        "quantity": 2,
+                        "expectedDiscountAmount": 0
+                    },
+                    {
+                        "quantity": 3,
+                        "expectedDiscountAmount": 1.00
+                    },
+                    {
+                        "quantity": 4,
+                        "expectedDiscountAmount": 1.00
+                    },
+                    {
+                        "quantity": 5,
+                        "expectedDiscountAmount": 1.00
+                    },
+                    {
+                        "quantity": 6,
+                        "expectedDiscountAmount": 2.00
+                    },
+                    {
+                        "quantity": 7,
+                        "expectedDiscountAmount": 2.00
+                    },
+                    {
+                        "quantity": 8,
+                        "expectedDiscountAmount": 2.00
+                    },
+                    {
+                        "quantity": 9,
+                        "expectedDiscountAmount": 2.00
+                    },
+                    {
+                        "quantity": 10,
+                        "expectedDiscountAmount": 2.00
+                    },
+                    {
+                        "quantity": 11,
+                        "expectedDiscountAmount": 2.00
+                    },
+                    {
+                        "quantity": 12,
+                        "expectedDiscountAmount": 2.00
+                    },
+                    {
+                        "quantity": 13,
+                        "expectedDiscountAmount": 2.00
+                    }
+                ],
+                "productPrice": 2.00
+            }
         }
     ]
 }
