@@ -98,13 +98,11 @@ describe('The getDiscountAmount method', () => {
 
 describe('The limit property of a promotion', () => {
     test('That it returns half of the productLineItem\'s total price (up to X) if the promotion is a markdown of 50% limit X', () => {
-        const productPrice = 5.00,
-            promotion = promoData.limitedPromotions[0],
-            quantitiesToTest = [1,2,3,4,5,6,7,9,10];
+        const promotion = promoData.limitedPromotions[0],
+            { data, productPrice } = promotion.test;
 
-        quantitiesToTest.forEach(quantity => {
-            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
-                expectedDiscountAmount = (promotion.percentOff * productPrice * Math.min(quantity, promotion.limit));
+        data.forEach(({ quantity, expectedDiscountAmount }) => {
+            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice);
 
             expect(markdownAmount).toBe(expectedDiscountAmount);
         });

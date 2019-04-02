@@ -187,7 +187,40 @@
             "buy": 0,
             "get": 1,
             "percentOff": 0.5,
-            "limit": 3
+            "limit": 3,
+            "test": {
+                "data": [
+                    {
+                        "quantity": 1,
+                        "expectedDiscountAmount": 2.50
+                    },
+                    {
+                        "quantity": 2,
+                        "expectedDiscountAmount": 5.00
+                    },
+                    {
+                        "quantity": 3,
+                        "expectedDiscountAmount": 7.50
+                    },
+                    {
+                        "quantity": 4,
+                        "expectedDiscountAmount": 7.50
+                    },
+                    {
+                        "quantity": 5,
+                        "expectedDiscountAmount": 7.50
+                    },
+                    {
+                        "quantity": 6,
+                        "expectedDiscountAmount": 7.50
+                    },
+                    {
+                        "quantity": 7,
+                        "expectedDiscountAmount": 7.50
+                    }
+                ],
+                "productPrice": 5
+            }
         },
         {
             "type": "buyXgetY",
