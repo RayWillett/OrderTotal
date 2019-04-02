@@ -43,13 +43,13 @@ class PromotionManager {
             _gotten = 0;
 
             // Remove items which may trigger the discount
-            while (shouldCheckBoughtAmount && (_bought <= promotion.buy) && (_quantity > 0)) {
+            while (shouldCheckBoughtAmount && (_bought < promotion.buy) && (_quantity > 0)) {
                 _quantity--;
                 _bought++;
                 totalMarkdownAmount += 0; // These items are not discounted. Adding 0 to help document intent.
             }
 
-            while ((_quantity > 0) && (_gotten <= promotion.get)) {
+            while ((_quantity > 0) && (_gotten < promotion.get)) {
                 _quantity--;
                 _gotten++;
                 totalMarkdownAmount += markdownAmount;
