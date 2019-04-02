@@ -87,15 +87,11 @@ describe('The getDiscountAmount method', () => {
     });
 
     test('That it returns the correct discount to the products\'s price if the promotion is a "3 for $5" type', () => {
-        const productPrice = 8.00,
-            promotion = promoData.promotions[2],
-            quantitiesToTest = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+        const promotion = promoData.promotions[2],
+            { data, productPrice } = promotion.test;
 
-        quantitiesToTest.forEach(quantity => {
-            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
-                bundledProducts = Math.floor(quantity / promotion.quantityNeeded),
-                remainingProducts = (quantity % promotion.quantityNeeded),
-                expectedDiscountAmount = (productPrice * quantity) - ((promotion.newPrice * bundledProducts) + (remainingProducts * productPrice));
+        data.forEach(({ quantity, expectedDiscountAmount }) => {
+            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice);
 
             expect(markdownAmount).toBe(expectedDiscountAmount);
         });
