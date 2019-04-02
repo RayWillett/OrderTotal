@@ -13,7 +13,40 @@
             "productID": "toilet paper",
             "buy": 1,
             "get": 1,
-            "percentOff": 0.5
+            "percentOff": 0.5,
+            "test": {
+                "data": [
+                    {
+                        "quantity": 1,
+                        "expectedDiscountAmount": 0
+                    },
+                    {
+                        "quantity": 2,
+                        "expectedDiscountAmount": 2.50
+                    },
+                    {
+                        "quantity": 3,
+                        "expectedDiscountAmount": 2.50
+                    },
+                    {
+                        "quantity": 4,
+                        "expectedDiscountAmount": 5.00
+                    },
+                    {
+                        "quantity": 5,
+                        "expectedDiscountAmount": 5.00
+                    },
+                    {
+                        "quantity": 6,
+                        "expectedDiscountAmount": 7.50
+                    },
+                    {
+                        "quantity": 7,
+                        "expectedDiscountAmount": 7.50
+                    }
+                ],
+                "productPrice": 5.00
+            }
         },
         {
             "type": "bundle",
