@@ -28,13 +28,24 @@ class PromotionManager {
       * @param productPrice {number} - The undiscounted price of the item.
       * @returns {number} the discount amount for this ProductLineItem.
       */
-     getMarkdownAmount (promotion, quantity, productPrice) {
+     _getMarkdownAmount (promotion, quantity, productPrice) {
         const productsInAPromotionGroup = (promotion.buy + promotion.get),
             numberOfProductGroupsEligibleForDiscount = Math.floor(quantity / productsInAPromotionGroup),
             discountAmountPerProductGroup = (promotion.percentOff * productPrice);
 
         return discountAmountPerProductGroup * numberOfProductGroupsEligibleForDiscount
      }
+
+    /**
+      * Calculates the discount amount for a single ProductLineItem in the cart for promotions with 
+      * the following types: markdown, buyXgetY.
+      *
+      * @param promotion {object} - the promotion to get the discount amount of.
+      * @param quantity {number} - The quantity of the item in the cart.
+      * @param productPrice {number} - The undiscounted price of the item.
+      * @returns {number} the discount amount for this ProductLineItem.
+      */
+     getDiscountAmount(promotion, quantity, productPrice) {}
 }
 
 module.exports = PromotionManager;
