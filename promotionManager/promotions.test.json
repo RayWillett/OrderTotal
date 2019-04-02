@@ -228,7 +228,40 @@
             "buy": 1,
             "get": 1,
             "percentOff": 0.5,
-            "limit": 2
+            "limit": 2,
+            "test": {
+                "data": [
+                    {
+                        "quantity": 1,
+                        "expectedDiscountAmount": 0
+                    },
+                    {
+                        "quantity": 2,
+                        "expectedDiscountAmount": 1.00
+                    },
+                    {
+                        "quantity": 3,
+                        "expectedDiscountAmount": 1.00
+                    },
+                    {
+                        "quantity": 4,
+                        "expectedDiscountAmount": 1.00
+                    },
+                    {
+                        "quantity": 5,
+                        "expectedDiscountAmount": 1.00
+                    },
+                    {
+                        "quantity": 6,
+                        "expectedDiscountAmount": 1.00
+                    },
+                    {
+                        "quantity": 7,
+                        "expectedDiscountAmount": 1.00
+                    }
+                ],
+                "productPrice": 2.00
+            }
         },
         {
             "type": "bundle",

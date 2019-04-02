@@ -109,14 +109,11 @@ describe('The limit property of a promotion', () => {
     });
 
     test('That it returns the correct discount to the products\'s price if the promotion is a "Buy One Get One for 50% off limit X"', () => {
-        const productPrice = 5.00,
-            promotion = promoData.limitedPromotions[1],
-            quantitiesToTest = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+        const promotion = promoData.limitedPromotions[1],
+            { data, productPrice } = promotion.test;
 
-        quantitiesToTest.forEach(quantity => {
-            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
-                applyTo = Math.min(quantity, promotion.limit);
-                expectedDiscountAmount = (promotion.percentOff * productPrice * Math.floor(applyTo / (promotion.buy + promotion.get)));
+        data.forEach(({ quantity, expectedDiscountAmount }) => {
+            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice);
 
             expect(markdownAmount).toBe(expectedDiscountAmount);
         });
