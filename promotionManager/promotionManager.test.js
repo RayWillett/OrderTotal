@@ -61,13 +61,11 @@ describe('The getDiscountAmount method', () => {
     });
 
     test('That it returns half of the productLineItem\'s total price if the promotion is a markdown of 50%', () => {
-        const productPrice = 5.00,
-            promotion = promoData.promotions[0],
-            quantitiesToTest = [1,2,3,4,5,6,7,9,10];
+        const promotion = promoData.promotions[0],
+            { data, productPrice } = promotion.test;
 
-        quantitiesToTest.forEach(quantity => {
-            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
-                expectedDiscountAmount = (promotion.percentOff * productPrice * quantity);
+        data.forEach(({ quantity, expectedDiscountAmount }) => {
+            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice);
 
             expect(markdownAmount).toBe(expectedDiscountAmount);
         });
