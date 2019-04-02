@@ -10,6 +10,10 @@
             "test": {
                 "data": [
                     {
+                        "quantity": 0,
+                        "expectedDiscountAmount": 0
+                    },
+                    {
                         "quantity": 1,
                         "expectedDiscountAmount": 2.50
                     },

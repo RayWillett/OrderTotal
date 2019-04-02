@@ -51,15 +51,6 @@ describe('The getApplicablePromotions method', () => {
 
 
 describe('The getDiscountAmount method', () => {
-    test('That it returns 0 if the quantity is 0', () => {
-        const quantity = 0,
-            productPrice = 5.00,
-            promotion = promoData.promotions[0],
-            markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice);
-
-        expect(markdownAmount).toBe(0);
-    });
-
     test('That it returns half of the productLineItem\'s total price if the promotion is a markdown of 50%', () => {
         const promotion = promoData.promotions[0],
             { data, productPrice } = promotion.test;
