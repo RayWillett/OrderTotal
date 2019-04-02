@@ -24,13 +24,13 @@ class PromotionManager {
       * the following types: markdown, buyXgetY.
       *
       * @param promotion {object} - the promotion to get the discount amount of.
-      * @param quantity {number} - The quantity of the item in the cart.
+      * @param appliedTo {number} - The number of the item in the cart for which the discount can be applied.
       * @param productPrice {number} - The undiscounted price of the item.
       * @returns {number} the discount amount for this ProductLineItem.
       */
-     _getMarkdownDiscountAmount (promotion, quantity, productPrice) {
+     _getMarkdownDiscountAmount (promotion, appliedTo, productPrice) {
         const productsInAPromotionGroup = (promotion.buy + promotion.get),
-            numberOfProductGroupsEligibleForDiscount = Math.floor(quantity / productsInAPromotionGroup),
+            numberOfProductGroupsEligibleForDiscount = Math.floor(appliedTo / productsInAPromotionGroup),
             discountAmountPerProductGroup = (promotion.percentOff * productPrice);
 
         return (discountAmountPerProductGroup * numberOfProductGroupsEligibleForDiscount);
@@ -42,14 +42,14 @@ class PromotionManager {
      * the following types: bundle.
      *
      * @param promotion {object} - the promotion to get the discount amount of.
-     * @param quantity {number} - The quantity of the item in the cart.
+     * @param appliedTo {number} - The number of the item in the cart for which the discount can be applied.
      * @param productPrice {number} - The undiscounted price of the item.
      * @returns {number} the discount amount for this ProductLineItem.
      */
-     _getBundleDiscountAmount (promotion, quantity, productPrice) {
-        const fullPrice = (quantity * productPrice), 
-            numberOfBundles = Math.floor(quantity / promotion.quantityNeeded),
-            numberOfFullPriceItems = (quantity % promotion.quantityNeeded),
+     _getBundleDiscountAmount (promotion, appliedTo, productPrice) {
+        const fullPrice = (appliedTo * productPrice), 
+            numberOfBundles = Math.floor(appliedTo / promotion.quantityNeeded),
+            numberOfFullPriceItems = (appliedTo % promotion.quantityNeeded),
             { newPrice } = promotion,
             productLineItemPrice = (productPrice * numberOfFullPriceItems) + (newPrice * numberOfBundles);
 
@@ -61,11 +61,11 @@ class PromotionManager {
      * the following types: bundle.
      *
      * @param promotion {object} - the promotion to get the discount amount of.
-     * @param quantity {number} - The quantity of the item in the cart.
+     * @param appliedTo {number} - The number of the item in the cart for which the discount can be applied.
      * @param unitPrice {number} - The undiscounted price of the item.
      * @returns {number} the discount amount for this ProductLineItem.
      */
-     _getWeightedDiscountAmount (promotion, quantity, unitPrice) {
+     _getWeightedDiscountAmount (promotion, appliedTo, unitPrice) {
         return 0;
      }
 
@@ -79,12 +79,14 @@ class PromotionManager {
       * @returns {number} the discount amount for this ProductLineItem.
       */
      getDiscountAmount(promotion, quantity, productPrice) {
+        const limit = (promotion.limit || Infinity);
+        const appliedTo = Math.min(quantity, limit);
         switch (promotion.type) {
             case "markdown":
             case "buyXgetY":
-                return this._getMarkdownDiscountAmount(promotion, quantity, productPrice);
+                return this._getMarkdownDiscountAmount(promotion, appliedTo, productPrice);
             case "bundle":
-                return this._getBundleDiscountAmount(promotion, quantity, productPrice);
+                return this._getBundleDiscountAmount(promotion, appliedTo, productPrice);
             case "buyNgeM_weighted":
                 return this._getWeightedDiscountAmount(promotion, quantity, productPrice);
             default:

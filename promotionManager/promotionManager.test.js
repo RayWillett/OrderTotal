@@ -65,12 +65,12 @@ describe('The getDiscountAmount method', () => {
             promotion = promoData.promotions[0],
             quantitiesToTest = [1,2,3,4,5,6,7,9,10];
 
-            quantitiesToTest.forEach(quantity => {
-                const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
-                    expectedDiscountAmount = (promotion.percentOff * productPrice * quantity);
+        quantitiesToTest.forEach(quantity => {
+            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
+                expectedDiscountAmount = (promotion.percentOff * productPrice * quantity);
 
-                expect(markdownAmount).toBe(expectedDiscountAmount);
-            });
+            expect(markdownAmount).toBe(expectedDiscountAmount);
+        });
     });
 
     test('That it returns the correct discount to the products\'s price if the promotion is a "Buy One Get One for 50% off"', () => {
@@ -78,12 +78,12 @@ describe('The getDiscountAmount method', () => {
             promotion = promoData.promotions[1],
             quantitiesToTest = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-            quantitiesToTest.forEach(quantity => {
-                const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
-                    expectedDiscountAmount = (promotion.percentOff * productPrice * Math.floor(quantity / (promotion.buy + promotion.get)));
+        quantitiesToTest.forEach(quantity => {
+            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
+                expectedDiscountAmount = (promotion.percentOff * productPrice * Math.floor(quantity / (promotion.buy + promotion.get)));
 
-                expect(markdownAmount).toBe(expectedDiscountAmount);
-            });
+            expect(markdownAmount).toBe(expectedDiscountAmount);
+        });
     });
 
     test('That it returns the correct discount to the products\'s price if the promotion is a "3 for $5" type', () => {
@@ -91,13 +91,13 @@ describe('The getDiscountAmount method', () => {
             promotion = promoData.promotions[2],
             quantitiesToTest = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-            quantitiesToTest.forEach(quantity => {
-                const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
-                    bundleProducts = Math.floor(quantity / promotion.quantityNeeded),
-                    remainingProducts = (quantity % promotion.quantityNeeded),
-                    expectedDiscountAmount = (productPrice * quantity) - ((promotion.newPrice * bundleProducts) + (remainingProducts * productPrice));
+        quantitiesToTest.forEach(quantity => {
+            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
+                bundledProducts = Math.floor(quantity / promotion.quantityNeeded),
+                remainingProducts = (quantity % promotion.quantityNeeded),
+                expectedDiscountAmount = (productPrice * quantity) - ((promotion.newPrice * bundledProducts) + (remainingProducts * productPrice));
 
-                expect(markdownAmount).toBe(expectedDiscountAmount);
-            });
+            expect(markdownAmount).toBe(expectedDiscountAmount);
+        });
     });
 });

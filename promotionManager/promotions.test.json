@@ -26,5 +26,30 @@
             "productID": "beef",
             "percentOff": 0.25
         }
+    ],
+    "limitedPromotions": [
+        {
+            "type": "markdown",
+            "productID": "soup",
+            "buy": 0,
+            "get": 1,
+            "percentOff": 0.5,
+            "limit": 3
+        },
+        {
+            "type": "buyXgetY",
+            "productID": "toilet paper",
+            "buy": 1,
+            "get": 1,
+            "percentOff": 0.5,
+            "limit": 2
+        },
+        {
+            "type": "bundle",
+            "productID": "toilet paper",
+            "quantityNeeded": 3,
+            "newPrice": 5.00,
+            "limit": 6
+        }
     ]
 }
