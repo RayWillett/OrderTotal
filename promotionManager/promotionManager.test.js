@@ -14,7 +14,7 @@ afterEach(() => {
 describe('The PromotionManager class', () => {
     test('That promotionManager is defined', () => {
         expect(promotionManager).toBeDefined();
-        expect(typeof promotionManager).toBe('object');
+        expect(promotionManager).toBeInstanceOf(Object);
     });
 
     test('That the availablePromotions exists', () => {
@@ -24,7 +24,12 @@ describe('The PromotionManager class', () => {
 
     test('That getApplicablePromotions exists', () => {
         expect(promotionManager.getApplicablePromotions).toBeDefined();
-        expect(typeof promotionManager.getApplicablePromotions).toBe('function');
+        expect(promotionManager.getApplicablePromotions).toBeInstanceOf(Function);
+    });
+
+    test('That getMarkdownAmount exists', () => {
+        expect(promotionManager.getMarkdownAmount).toBeDefined();
+        expect(promotionManager.getMarkdownAmount).toBeInstanceOf(Function);
     });
 });
 
