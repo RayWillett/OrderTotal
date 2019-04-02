@@ -36,16 +36,55 @@ class PromotionManager {
         return discountAmountPerProductGroup * numberOfProductGroupsEligibleForDiscount
      }
 
+
+    /**
+     * Calculates the discount amount for a single ProductLineItem in the cart for promotions with 
+     * the following types: bundle.
+     *
+     * @param promotion {object} - the promotion to get the discount amount of.
+     * @param quantity {number} - The quantity of the item in the cart.
+     * @param productPrice {number} - The undiscounted price of the item.
+     * @returns {number} the discount amount for this ProductLineItem.
+     */
+     _getBundleAmount (promotion, quantity, productPrice) {
+        
+     }
+
+    /**
+     * Calculates the discount amount for a single ProductLineItem in the cart for promotions with 
+     * the following types: bundle.
+     *
+     * @param promotion {object} - the promotion to get the discount amount of.
+     * @param quantity {number} - The quantity of the item in the cart.
+     * @param unitPrice {number} - The undiscounted price of the item.
+     * @returns {number} the discount amount for this ProductLineItem.
+     */
+     _getWeightedDiscountAmount (promotion, quantity, unitPrice) {
+
+     }
+
     /**
       * Calculates the discount amount for a single ProductLineItem in the cart for promotions with 
-      * the following types: markdown, buyXgetY.
+      * the following types: buyNgeM_weighted.
       *
       * @param promotion {object} - the promotion to get the discount amount of.
       * @param quantity {number} - The quantity of the item in the cart.
       * @param productPrice {number} - The undiscounted price of the item.
       * @returns {number} the discount amount for this ProductLineItem.
       */
-     getDiscountAmount(promotion, quantity, productPrice) {}
+     getDiscountAmount(promotion, quantity, productPrice) {
+        switch (promotion.type) {
+            case "markdown":
+            case "buyXgetY":
+                return this._getMarkdownAmount(promotion, quantity, productPrice);
+            case "bundle":
+                return this._getBundleAmount(promotion, quantity, productPrice);
+            case "buyNgeM_weighted":
+                return this._getWeightedDiscountAmount(promotion, quantity, productPrice);
+            default:
+                return 0;
+        }
+     }
 }
 
 module.exports = PromotionManager;

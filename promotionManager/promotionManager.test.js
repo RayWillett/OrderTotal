@@ -27,9 +27,9 @@ describe('The PromotionManager class', () => {
         expect(promotionManager.getApplicablePromotions).toBeInstanceOf(Function);
     });
 
-    test('That _getMarkdownAmount exists', () => {
-        expect(promotionManager._getMarkdownAmount).toBeDefined();
-        expect(promotionManager._getMarkdownAmount).toBeInstanceOf(Function);
+    test('That getDiscountAmount exists', () => {
+        expect(promotionManager.getDiscountAmount).toBeDefined();
+        expect(promotionManager.getDiscountAmount).toBeInstanceOf(Function);
     });
 });
 
@@ -50,12 +50,12 @@ describe('The getApplicablePromotions method', () => {
 });
 
 
-describe('The _getMarkdownAmount method', () => {
+describe('The getDiscountAmount method', () => {
     test('That it returns 0 if the quantity is 0', () => {
         const quantity = 0,
             productPrice = 5.00,
             promotion = promoData.promotions[0],
-            markdownAmount = promotionManager._getMarkdownAmount(promotion, quantity, productPrice);
+            markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice);
 
         expect(markdownAmount).toBe(0);
     });
@@ -66,7 +66,7 @@ describe('The _getMarkdownAmount method', () => {
             quantitiesToTest = [1,2,3,4,5,6,7,9,10];
 
             quantitiesToTest.forEach(quantity => {
-                const markdownAmount = promotionManager._getMarkdownAmount(promotion, quantity, productPrice),
+                const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
                     expectedDiscountAmount = (promotion.percentOff * productPrice * quantity);
 
                 expect(markdownAmount).toBe(expectedDiscountAmount);
@@ -79,7 +79,7 @@ describe('The _getMarkdownAmount method', () => {
             quantitiesToTest = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
             quantitiesToTest.forEach(quantity => {
-                const markdownAmount = promotionManager._getMarkdownAmount(promotion, quantity, productPrice),
+                const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
                     expectedDiscountAmount = (promotion.percentOff * productPrice * Math.floor(quantity / (promotion.buy + promotion.get)));
 
                 expect(markdownAmount).toBe(expectedDiscountAmount);
