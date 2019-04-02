@@ -146,3 +146,14 @@ describe('The getDiscountAmount method', () => {
         });
     });
 });
+
+describe('The roundToNearestCent method', () => {
+    test('that a whole number of cents is not changed', () => {
+        const dollarAmounts = [0.25, 0.10, 1.0, 2, 5, 5.8, 1.92, 1111111111.22];
+
+        dollarAmounts.forEach(dollarAmount => {
+            const roundedAmount = promotionManager.roundToNearestCent(dollarAmount);
+            expect(dollarAmount).toBe(roundedAmount)
+        });
+    });
+});
