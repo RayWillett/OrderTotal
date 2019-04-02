@@ -77,7 +77,11 @@ class PromotionManager {
      * @returns {number} the discount amount for this ProductLineItem.
      */
      _getWeightedDiscountAmount (promotion, appliedTo, unitPrice) {
-        return 0;
+        const remainingProductAmount = (appliedTo - promotion.buy),
+              upToAmount = Math.min(promotion.buy, remainingProductAmount),
+              discountedProductAmount = Math.max(0, upToAmount);
+
+          return this.roundToNearestCent(discountedProductAmount * promotion.percentOff * unitPrice);
      }
 
     /**

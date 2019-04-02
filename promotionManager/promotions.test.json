@@ -24,7 +24,53 @@
         {
             "type": "buyNgeM_weighted",
             "productID": "beef",
-            "percentOff": 0.25
+            "buy": 1.5,
+            "percentOff": 0.25,
+            "test": {
+                "data": [
+                    {
+                        "quantity": 1,
+                        "expectedDiscountAmount": 0
+                    },
+                    {
+                        "quantity": 1.7,
+                        "expectedDiscountAmount": 0.10
+                    },
+                    {
+                        "quantity": 1.5,
+                        "expectedDiscountAmount": 0
+                    },
+                    {
+                        "quantity": 2,
+                        "expectedDiscountAmount": 0.25
+                    },
+                    {
+                        "quantity": 2.5,
+                        "expectedDiscountAmount": 0.50
+                    },
+                    {
+                        "quantity": 3,
+                        "expectedDiscountAmount": 0.75
+                    },
+                    {
+                        "quantity": 4,
+                        "expectedDiscountAmount": 0.75
+                    },
+                    {
+                        "quantity": 5,
+                        "expectedDiscountAmount": 0.75
+                    },
+                    {
+                        "quantity": 6,
+                        "expectedDiscountAmount": 0.75
+                    },
+                    {
+                        "quantity": 7.8,
+                        "expectedDiscountAmount": 0.75
+                    }
+                ],
+                "productPrice": 1.99
+            }
         }
     ],
     "limitedPromotions": [

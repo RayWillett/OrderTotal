@@ -101,6 +101,17 @@ describe('The getDiscountAmount method', () => {
         });
     });
 
+    test('That it returns the correct discount to the products\'s price if the promotion is a "Buy M get N for %X off" type', () => {
+        const promotion = promoData.promotions[3],
+            { data, productPrice } = promotion.test;
+
+        data.forEach(({ quantity, expectedDiscountAmount }) => {
+            const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice);
+
+            expect(markdownAmount).toBe(expectedDiscountAmount);
+        });
+    });
+
     describe('The limit property of a promotion', () => {
         test('That it returns half of the productLineItem\'s total price (up to X) if the promotion is a markdown of 50% limit X', () => {
             const productPrice = 5.00,
