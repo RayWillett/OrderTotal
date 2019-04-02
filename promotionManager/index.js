@@ -20,7 +20,8 @@ class PromotionManager {
      }
 
      /**
-      * Calculates the discount amount for a single ProductLineItem in the cart.
+      * Calculates the discount amount for a single ProductLineItem in the cart for promotions with 
+      * the following types: markdown, buyXgetY.
       *
       * @param promotion {object} - the promotion to get the discount amount of.
       * @param quantity {number} - The quantity of the item in the cart.
@@ -28,34 +29,11 @@ class PromotionManager {
       * @returns {number} the discount amount for this ProductLineItem.
       */
      getMarkdownAmount (promotion, quantity, productPrice) {
-        let totalMarkdownAmount = 0,
-            _quantity = quantity,
-            _bought, _gotten;
+        const productsInAPromotionGroup = (promotion.buy + promotion.get),
+            numberOfProductGroupsEligibleForDiscount = Math.floor(quantity / productsInAPromotionGroup),
+            discountAmountPerProductGroup = (promotion.percentOff * productPrice);
 
-         //TODO: This calculation should be pulled off into it's own function
-        const markdownAmount = (productPrice * promotion.percentOff),
-            shouldCheckBoughtAmount = (promotion.buy > 0);
-
-        // While there are still items that may qualify for a discount
-        while (_quantity > 0) {
-            //reset counters before the loop starts
-            _bought = 0;
-            _gotten = 0;
-
-            // Remove items which may trigger the discount
-            while (shouldCheckBoughtAmount && (_bought < promotion.buy) && (_quantity > 0)) {
-                _quantity--;
-                _bought++;
-                totalMarkdownAmount += 0; // These items are not discounted. Adding 0 to help document intent.
-            }
-
-            while ((_quantity > 0) && (_gotten < promotion.get)) {
-                _quantity--;
-                _gotten++;
-                totalMarkdownAmount += markdownAmount;
-            }
-        }
-        return totalMarkdownAmount;
+        return discountAmountPerProductGroup * numberOfProductGroupsEligibleForDiscount
      }
 }
 
