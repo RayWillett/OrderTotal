@@ -85,4 +85,19 @@ describe('The getDiscountAmount method', () => {
                 expect(markdownAmount).toBe(expectedDiscountAmount);
             });
     });
+
+    test('That it returns the correct discount to the products\'s price if the promotion is a "3 for $5" type', () => {
+        const productPrice = 8.00,
+            promotion = promoData.promotions[2],
+            quantitiesToTest = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+
+            quantitiesToTest.forEach(quantity => {
+                const markdownAmount = promotionManager.getDiscountAmount(promotion, quantity, productPrice),
+                    bundleProducts = Math.floor(quantity / promotion.quantityNeeded),
+                    remainingProducts = (quantity % promotion.quantityNeeded),
+                    expectedDiscountAmount = (productPrice * quantity) - ((promotion.newPrice * bundleProducts) + (remainingProducts * productPrice));
+
+                expect(markdownAmount).toBe(expectedDiscountAmount);
+            });
+    });
 });

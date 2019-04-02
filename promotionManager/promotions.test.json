@@ -18,7 +18,7 @@
         {
             "type": "bundle",
             "productID": "toilet paper",
-            "quantity": 3,
+            "quantityNeeded": 3,
             "newPrice": 5.00
         },
         {

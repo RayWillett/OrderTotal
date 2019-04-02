@@ -28,12 +28,12 @@ class PromotionManager {
       * @param productPrice {number} - The undiscounted price of the item.
       * @returns {number} the discount amount for this ProductLineItem.
       */
-     _getMarkdownAmount (promotion, quantity, productPrice) {
+     _getMarkdownDiscountAmount (promotion, quantity, productPrice) {
         const productsInAPromotionGroup = (promotion.buy + promotion.get),
             numberOfProductGroupsEligibleForDiscount = Math.floor(quantity / productsInAPromotionGroup),
             discountAmountPerProductGroup = (promotion.percentOff * productPrice);
 
-        return discountAmountPerProductGroup * numberOfProductGroupsEligibleForDiscount
+        return (discountAmountPerProductGroup * numberOfProductGroupsEligibleForDiscount);
      }
 
 
@@ -46,8 +46,14 @@ class PromotionManager {
      * @param productPrice {number} - The undiscounted price of the item.
      * @returns {number} the discount amount for this ProductLineItem.
      */
-     _getBundleAmount (promotion, quantity, productPrice) {
-        
+     _getBundleDiscountAmount (promotion, quantity, productPrice) {
+        const fullPrice = (quantity * productPrice), 
+            numberOfBundles = Math.floor(quantity / promotion.quantityNeeded),
+            numberOfFullPriceItems = (quantity % promotion.quantityNeeded),
+            { newPrice } = promotion,
+            productLineItemPrice = (productPrice * numberOfFullPriceItems) + (newPrice * numberOfBundles);
+
+            return (fullPrice - productLineItemPrice);
      }
 
     /**
@@ -60,7 +66,7 @@ class PromotionManager {
      * @returns {number} the discount amount for this ProductLineItem.
      */
      _getWeightedDiscountAmount (promotion, quantity, unitPrice) {
-
+        return 0;
      }
 
     /**
@@ -76,9 +82,9 @@ class PromotionManager {
         switch (promotion.type) {
             case "markdown":
             case "buyXgetY":
-                return this._getMarkdownAmount(promotion, quantity, productPrice);
+                return this._getMarkdownDiscountAmount(promotion, quantity, productPrice);
             case "bundle":
-                return this._getBundleAmount(promotion, quantity, productPrice);
+                return this._getBundleDiscountAmount(promotion, quantity, productPrice);
             case "buyNgeM_weighted":
                 return this._getWeightedDiscountAmount(promotion, quantity, productPrice);
             default:
