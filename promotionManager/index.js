@@ -77,11 +77,25 @@ class PromotionManager {
      * @returns {number} the discount amount for this ProductLineItem.
      */
      _getWeightedDiscountAmount (promotion, appliedTo, unitPrice) {
-        const remainingProductAmount = (appliedTo - promotion.buy),
-              upToAmount = Math.min(promotion.buy, remainingProductAmount),
-              discountedProductAmount = Math.max(0, upToAmount);
+          // Amount of product in a fully used promotion
+          // i.e. the full price amount and the equal amount of discounted product
+          const amountInFullPromotion = (promotion.buy * 2);
 
-          return this.roundToNearestCent(discountedProductAmount * promotion.percentOff * unitPrice);
+          // The number of promotional amounts for which the number in the buy amound has 
+          // been reach AND the full amount of discounted product has also been reached
+          const numberOfFullyUsedPromotions = Math.floor(appliedTo / amountInFullPromotion);
+
+          // The remaining amount that doesn't take up the full promotion allowance
+          // e.g. 1.2 ounces remains after removing the amount already discounted.
+          const remainingPartiallyUsedAmount = (appliedTo % amountInFullPromotion);
+
+          // The amount of remainingPartiallyUsedAmount which will be discounted.
+          const remainingPartiallyDiscountedAmount = Math.max(0, (remainingPartiallyUsedAmount - promotion.buy));
+
+          // The amount of discounted product
+          let discountedAmount = (numberOfFullyUsedPromotions * promotion.buy) + remainingPartiallyDiscountedAmount;
+
+          return this.roundToNearestCent(discountedAmount * promotion.percentOff * unitPrice);
      }
 
     /**

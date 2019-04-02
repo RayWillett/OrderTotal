@@ -53,20 +53,24 @@
                         "expectedDiscountAmount": 0.75
                     },
                     {
+                        "quantity": 3.5,
+                        "expectedDiscountAmount": 0.75
+                    },
+                    {
                         "quantity": 4,
                         "expectedDiscountAmount": 0.75
                     },
                     {
                         "quantity": 5,
-                        "expectedDiscountAmount": 0.75
+                        "expectedDiscountAmount": 1.00
                     },
                     {
                         "quantity": 6,
-                        "expectedDiscountAmount": 0.75
+                        "expectedDiscountAmount": 1.49
                     },
                     {
                         "quantity": 7.8,
-                        "expectedDiscountAmount": 0.75
+                        "expectedDiscountAmount": 1.64
                     }
                 ],
                 "productPrice": 1.99
