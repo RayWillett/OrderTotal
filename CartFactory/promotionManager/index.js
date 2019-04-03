@@ -95,7 +95,7 @@ class PromotionManager {
           // The amount of discounted product
           let discountedAmount = (numberOfFullyUsedPromotions * promotion.buy) + remainingPartiallyDiscountedAmount;
 
-          return this.roundToNearestCent(discountedAmount * promotion.percentOff * unitPrice);
+          return (discountedAmount * promotion.percentOff * unitPrice);
      }
 
     /**
@@ -108,19 +108,22 @@ class PromotionManager {
       * @returns {number} the discount amount for this ProductLineItem.
       */
      getDiscountAmount(promotion, quantity, productPrice) {
-        const limit = (promotion.limit || Infinity);
-        const appliedTo = Math.min(quantity, limit);
+        let discountAmount = 0;
+        const limit = (promotion.limit || Infinity),
+            appliedTo = Math.min(quantity, limit);
         switch (promotion.type) {
             case "markdown":
             case "buyXgetY":
-                return this._getMarkdownDiscountAmount(promotion, appliedTo, productPrice);
+                discountAmount = this._getMarkdownDiscountAmount(promotion, appliedTo, productPrice);
+                break;
             case "bundle":
-                return this._getBundleDiscountAmount(promotion, appliedTo, productPrice);
+                discountAmount =  this._getBundleDiscountAmount(promotion, appliedTo, productPrice);
+                break;
             case "buyNgeM_weighted":
-                return this._getWeightedDiscountAmount(promotion, quantity, productPrice);
-            default:
-                return 0;
+                discountAmount =  this._getWeightedDiscountAmount(promotion, quantity, productPrice);
+                break;
         }
+        return this.roundToNearestCent(discountAmount);
      }
 }
 

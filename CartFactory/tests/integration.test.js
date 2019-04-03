@@ -106,19 +106,23 @@ describe('Removing items from the cart', () => {
     });
 });
 
-describe.only('The cart promotions', () => {
+describe('The cart promotions', () => {
     beforeEach(() => {
         const promotions = promotionData.active;
         cart = CartFactory(products, promotions);
     });
 
-    test.only('That the cart promotions take affect', () => {
-        productIndexes = [1,3];
-
+    test('That the simple cart promotions take affect', () => {
         const product = products[1];
         expect(cart.getPretaxTotal()).toBe(0);
         cart.addItem(product.ID, 1);
         expect(cart.getPretaxTotal()).toBe(0.49);
+    });
 
+    test('That the more complicated cart promotions take affect', () => {
+        const product = products[3];
+        expect(cart.getPretaxTotal()).toBe(0);
+        cart.addItem(product.ID, 2);
+        expect(cart.getPretaxTotal()).toBe(19.48);
     });
 });
