@@ -17,7 +17,26 @@ class Cart {
     }
 
     /**
+     * Adjust the quantity of a productLineItem in the cart.
+     *
+     * @param productID {string} - The productID to remove
+     * @param quantity {number} - Optional. the number of products to remove. If null, all items matching productID are removed.
+     */
+    removeItem(productID, quantity) {
+        let productLineItem = this.productLineItems[productID];
+        if (productLineItem) {
+            // Set quantity to be all of the products if it is not a number.
+            quantity = isNaN(quantity) ? productLineItem.quantity : quantity;
+            productLineItem.removeQuantity(quantity);
+            if (0 == productLineItem.quantity) {
+                delete this.productLineItems[productID];
+            }
+        }
+    }
+
+    /**
      * Allows an item to be added to the cart at a given quantity.
+     *
      * @param {string} productID - The ID of the product being added to the cart.
      * @param {number} quantity = The quantity of the product to be added to the cart.
      */

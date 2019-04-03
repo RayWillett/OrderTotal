@@ -166,6 +166,36 @@ describe('The cart\'s AddItem method', () => {
     });
 });
 
+describe('The cart\s removeItem method', () => {
+    const removeFunction = jest.fn();
+    function productLineItemMockImplFunction (product, quantity) {
+        this.removeQuantity = removeFunction;
+        this.quantity = 0;
+    }
+
+    afterEach(() => {
+        removeFunction.mockClear();
+    });
+
+    test('That the cart calls the productLineItem removeQuantity function', () => {
+        const productID = 'marshmallows',
+            quantity = 2;
+
+        const mockedGetProduct = getMockedProductManager((productID => {
+            return ['beef stew', 'toilet paper', 'marshmallows'].indexOf(productID) > -1;
+        }));
+
+        const _cart = new Cart(mockedGetProduct, productLineItemMockImplFunction);
+
+        let result;
+        
+        _cart.addItem(productID, quantity);
+        result = _cart.removeItem(productID, 1);
+
+        expect(removeFunction.mock.calls.length).toEqual(1);
+    });
+});
+
 
 describe('The cart\'s getPretaxTotal method', () => {
     test('That getPretaxTotal is a function', () => {
