@@ -33,4 +33,20 @@ describe('Adding products to the cart', () => {
         cart.addItem(productID, 1);
         expect(Object.keys(cart.productLineItems).length).toBe(2);
     });
+
+    test('That the cart total is updated after an item is added', () => {
+        let product = products[1],
+            expectedTotal = 0;
+
+        expect(cart.getPretaxTotal()).toBe(0);
+        
+        cart.addItem(product.ID, 1);
+        expectedTotal += product.pricePerUnit;
+        expect(cart.getPretaxTotal()).toBe(expectedTotal);
+
+        productID = products[3];
+        cart.addItem(product.ID, 1);
+        expectedTotal += product.pricePerUnit;
+        expect(cart.getPretaxTotal()).toBe(expectedTotal);
+    });
 });
