@@ -39,6 +39,19 @@ class ProductLineItem {
         validateQuantity(this.product, increaseBy);
         this.quantity += increaseBy;
       }
+
+      /**
+       * Decreasees the quantity of the product by a given amount.
+       *
+       * @param decreaseBy {number} the amount to decrease the quantity by
+       */
+      removeQuantity (decreaseBy) {
+        validateQuantity(this.product, decreaseBy);
+        this.quantity -= decreaseBy;
+        if (this.quantity < 0) {
+          this.quantity = 0;
+        }
+      }
 }
 
 module.exports = ProductLineItem;

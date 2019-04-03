@@ -37,6 +37,11 @@ describe('The productLineItem module', () => {
         expect(productLineItem.addQuantity).toBeDefined();
         expect(typeof productLineItem.addQuantity).toBe('function');
     });
+
+    test('That productLineItem has an removeQuantity method', () => {
+        expect(productLineItem.removeQuantity).toBeDefined();
+        expect(typeof productLineItem.removeQuantity).toBe('function');
+    });
 });
 
 describe('The Quantity Validation', () => {
@@ -98,5 +103,14 @@ describe('The productLineItem addQuantity method', () => {
         expect(productLineItem.quantity).toEqual(1);
         productLineItem.addQuantity(1);
         expect(productLineItem.quantity).toEqual(2);
+    });
+});
+
+describe('The productLineItem removeQuantity method', () => {
+    test('That removeQuantity decreases the quantity of a product.', () => {
+        productLineItem = new ProductLineItem(productDefinition, 2);
+        expect(productLineItem.quantity).toEqual(2);
+        productLineItem.removeQuantity(1);
+        expect(productLineItem.quantity).toEqual(1);
     });
 });
