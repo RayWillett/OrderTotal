@@ -77,7 +77,7 @@ class Cart {
 
             let discountAmount = 0;
             if (productPromotion) {
-                discountAmount = this.promotionManager.getDiscountAmount(productPromotion, productLineItem.quantity, productLineItem.product.price);
+                discountAmount = this.promotionManager.getDiscountAmount(productPromotion, productLineItem.quantity, productLineItem.product.pricePerUnit);
             }
 
             return (totalPrice + (productLineItemPrice - discountAmount));

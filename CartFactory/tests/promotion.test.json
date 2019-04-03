@@ -1,3 +1,19 @@
 {
-    "none": []
+    "none": [],
+    "active": [
+        {
+            "type": "markdown",
+            "productID": "soup",
+            "buy": 0,
+            "get": 1,
+            "percentOff": 0.5
+        },
+        {
+            "type": "buyXgetY",
+            "productID": "talapia",
+            "buy": 1,
+            "get": 1,
+            "percentOff": 0.5
+        }
+    ]
 }

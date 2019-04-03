@@ -105,3 +105,20 @@ describe('Removing items from the cart', () => {
         expect(cart.getPretaxTotal()).toBe(roundToCents(expectedTotal));
     });
 });
+
+describe.only('The cart promotions', () => {
+    beforeEach(() => {
+        const promotions = promotionData.active;
+        cart = CartFactory(products, promotions);
+    });
+
+    test.only('That the cart promotions take affect', () => {
+        productIndexes = [1,3];
+
+        const product = products[1];
+        expect(cart.getPretaxTotal()).toBe(0);
+        cart.addItem(product.ID, 1);
+        expect(cart.getPretaxTotal()).toBe(0.49);
+
+    });
+});
