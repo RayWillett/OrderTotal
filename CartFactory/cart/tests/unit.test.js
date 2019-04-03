@@ -211,6 +211,23 @@ describe('The cart\s removeItem method', () => {
         result = _cart.removeItem(productID, quantity);
         expect(_cart.productLineItems).toEqual({});
     });
+
+    test('That the cart removes and item completely if no quantity is provided', () => {
+        const productID = 'marshmallows',
+            quantity = 4;
+
+        const mockedGetProduct = getMockedProductManager((productID => {
+            return ['beef stew', 'toilet paper', 'marshmallows'].indexOf(productID) > -1;
+        }));
+
+        const _cart = new Cart(mockedGetProduct, productLineItemMockImplFunction);
+
+        let result;
+        
+        _cart.addItem(productID, quantity);
+        result = _cart.removeItem(productID);
+        expect(_cart.productLineItems).toEqual({});
+    });
 });
 
 
