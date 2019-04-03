@@ -113,4 +113,11 @@ describe('The productLineItem removeQuantity method', () => {
         productLineItem.removeQuantity(1);
         expect(productLineItem.quantity).toEqual(1);
     });
+
+    test('That removeQuantity does not result in a negative quantity of a product.', () => {
+        productLineItem = new ProductLineItem(productDefinition, 2);
+        expect(productLineItem.quantity).toEqual(2);
+        productLineItem.removeQuantity(3);
+        expect(productLineItem.quantity).toEqual(0);
+    });
 });
