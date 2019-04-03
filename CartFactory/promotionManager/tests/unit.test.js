@@ -1,4 +1,4 @@
-const PromotionManager = require('./index');
+const PromotionManager = require('../index');
 const promoData = require('./promotions.test.json');
 
 let promotionManager;

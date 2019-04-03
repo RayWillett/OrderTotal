@@ -1,4 +1,4 @@
-const ProductLineItem = require('./index.js'),
+const ProductLineItem = require('../index.js'),
     productDefinitions = require('./product.test.json');
 
 let productLineItem, productDefinition, fractionalProductLineItem;

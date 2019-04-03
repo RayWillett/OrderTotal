@@ -1,11 +1,11 @@
-const Cart = require('./index');
+const Cart = require('../index');
 
 let cart;
 
 function getMockedProductManager (getProductDefinition) {
-    jest.mock('../productManager');
+    jest.mock('../../productManager');
 
-    const productManager = require('../productManager'),
+    const productManager = require('../../productManager'),
         mockFn = jest.fn(getProductDefinition);
 
     productManager.mockImplementation(() => {
@@ -17,9 +17,9 @@ function getMockedProductManager (getProductDefinition) {
 }
 
 function getMockedPromotionManager (promotions, getPrice, getPromotion) {
-    jest.mock('../promotionManager');
+    jest.mock('../../promotionManager');
 
-    const promotionManager = require('../promotionManager');
+    const promotionManager = require('../../promotionManager');
 
     promotionManager.mockImplementation(() => {
         return {
@@ -62,9 +62,9 @@ describe('The cart\'s properties', () => {
 });
 
 describe('The cart\'s AddItem method', () => {
-    jest.mock('../productLineItem');
+    jest.mock('../../productLineItem');
     
-    let productLineItemMockImpl = require('../productLineItem'),
+    let productLineItemMockImpl = require('../../productLineItem'),
         constructorMock = jest.fn(),
         mockGetProductFn = jest.fn(),
         mockAddQuantityFn = jest.fn();
@@ -206,7 +206,7 @@ describe('The cart\'s getPretaxTotal method', () => {
     });
 
     test('That getting the cart pretax total will call promotionManager.getApplicablePromotions once per item', () => {
-        jest.mock('../productLineItem');
+        jest.mock('../../productLineItem');
 
         const catalogData = require('./catalog.test.json'),
             mockedGetProduct = getMockedProductManager((productID => {
@@ -231,7 +231,7 @@ describe('The cart\'s getPretaxTotal method', () => {
     });
 
     test('That getting the cart pretax total will call promotionManager.getDiscountAmount once per item', () => {
-        jest.mock('../productLineItem');
+        jest.mock('../../productLineItem');
 
         const catalogData = require('./catalog.test.json'),
             mockedGetProduct = getMockedProductManager((productID => {

@@ -1,4 +1,4 @@
-const ProductManager = require('./index');
+const ProductManager = require('../index');
 
 let inventory;
 

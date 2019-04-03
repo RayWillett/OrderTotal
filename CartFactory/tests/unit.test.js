@@ -1,5 +1,5 @@
-const CartFactory = require('./index'),
-    Cart = require('./cart');
+const CartFactory = require('../index'),
+    Cart = require('../cart');
 
 let cart;
 
