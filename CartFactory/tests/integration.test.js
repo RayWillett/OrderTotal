@@ -49,4 +49,25 @@ describe('Adding products to the cart', () => {
         expectedTotal += product.pricePerUnit;
         expect(cart.getPretaxTotal()).toBe(expectedTotal);
     });
+
+    test('That the cart has the correct number of unique items in it when removing items', () => {
+        let productID = products[1].ID;
+
+        expect(Object.keys(cart.productLineItems).length).toBe(0);
+        
+        cart.addItem(productID, 1);
+        expect(Object.keys(cart.productLineItems).length).toBe(1);
+        
+        cart.addItem(productID, 1);
+        expect(Object.keys(cart.productLineItems).length).toBe(1);
+        cart.removeItem(productID, 1);
+        expect(Object.keys(cart.productLineItems).length).toBe(1);
+
+        productID = products[3].ID;
+        cart.addItem(productID, 1);
+        expect(Object.keys(cart.productLineItems).length).toBe(2);
+
+        cart.removeItem(productID);
+        expect(Object.keys(cart.productLineItems).length).toBe(1);
+    });
 });
