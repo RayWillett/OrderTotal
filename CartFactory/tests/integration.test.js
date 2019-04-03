@@ -1,3 +1,10 @@
+/**
+ * Helper function for math tests
+ */
+function roundToCents (dollarAmount) {
+    return Math.round(dollarAmount * 100) / 100;
+}
+
 const products = require('./product.test.json'),
     promotionData = require('./promotion.test.json'),
     CartFactory = require('../index.js');
@@ -42,12 +49,12 @@ describe('Adding products to the cart', () => {
         
         cart.addItem(product.ID, 1);
         expectedTotal += product.pricePerUnit;
-        expect(cart.getPretaxTotal()).toBe(expectedTotal);
+        expect(cart.getPretaxTotal()).toBe(roundToCents(expectedTotal));
 
-        productID = products[3];
+        product = products[3];
         cart.addItem(product.ID, 1);
         expectedTotal += product.pricePerUnit;
-        expect(cart.getPretaxTotal()).toBe(expectedTotal);
+        expect(cart.getPretaxTotal()).toBe(roundToCents(expectedTotal));
     });
 
     test('That the cart has the correct number of unique items in it when removing items', () => {
@@ -69,5 +76,30 @@ describe('Adding products to the cart', () => {
 
         cart.removeItem(productID);
         expect(Object.keys(cart.productLineItems).length).toBe(1);
+    });
+
+    test('That the cart total is updated after an item is added then removed', () => {
+        let product = products[1],
+            expectedTotal = 0;
+
+        expect(cart.getPretaxTotal()).toBe(0);
+        
+        cart.addItem(product.ID, 1);
+        expectedTotal += product.pricePerUnit;
+        expect(cart.getPretaxTotal()).toBe(roundToCents(expectedTotal));
+
+        product = products[3];
+        cart.addItem(product.ID, 1);
+        expectedTotal += product.pricePerUnit;
+        expect(cart.getPretaxTotal()).toBe(roundToCents(expectedTotal));
+
+        cart.removeItem(product.ID, 1);
+        expectedTotal -= product.pricePerUnit;
+        expect(cart.getPretaxTotal()).toBe(roundToCents(expectedTotal));
+
+        product = products[1];
+        cart.removeItem(product.ID, 1);
+        expectedTotal -= product.pricePerUnit;
+        expect(cart.getPretaxTotal()).toBe(roundToCents(expectedTotal));
     });
 });
