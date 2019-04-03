@@ -56,7 +56,9 @@ describe('Adding products to the cart', () => {
         expectedTotal += product.pricePerUnit;
         expect(cart.getPretaxTotal()).toBe(roundToCents(expectedTotal));
     });
+});
 
+describe('Removing items from the cart', () => {
     test('That the cart has the correct number of unique items in it when removing items', () => {
         let productID = products[1].ID;
 
