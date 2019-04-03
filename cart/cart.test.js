@@ -16,6 +16,20 @@ function getMockedProductManager (getProductDefinition) {
     return productManager();
 }
 
+function getMockedPromotionManager () {
+    jest.mock('../promotionManager');
+
+    const promotionManager = require('../promotionManager');
+
+    promotionManager.mockImplementation(() => {
+        return {
+            getDiscountedAmount: jest.fn(),
+            getApplicablePromotions: jest.fn()
+        }
+    });
+    return promotionManager();
+}
+
 beforeEach(() => {
     const productManagerMock = getMockedProductManager(() => true);
     cart = new Cart(productManagerMock);
@@ -164,27 +178,20 @@ describe('The cart\'s getPretaxTotal method', () => {
         expect(pretaxTotal).toBe(0);
     });
 
-    test('That a the cart pretax total will match the sum of product price times it\'s quantity', () => {
-        jest.mock('../productLineItem');
-
+    test('That the cart pretax total will match the sum of product price times it\'s quantity', () => {
         const catalogData = require('./catalog.test.json'),
             mockedGetProduct = getMockedProductManager((productID => {
                 return catalogData[productID];
             })),
-            productLineItemMockImpl = require('../productLineItem'),
-            constructorMock = jest.fn(),
-            mockAddQuantityFn = jest.fn(),
-            mockGetPriceFn = jest.fn(productID => catalogData[productID].pricePerUnit * catalogData[productID].quantity);
-
-        productLineItemMockImpl.mockImplementation(() => {
-            return {
-                constructor: constructorMock,
-                getPrice: mockGetPriceFn,
-                addQuantity: mockAddQuantityFn
+            mockPromotionManager = getMockedPromotionManager();
+        
+        function productLineItemMockImpl(product, quantity) {
+            this.getPrice = () => {
+                return catalogData[product.ID].pricePerUnit * catalogData[product.ID].quantity;
             }
-        });
+        }
 
-        const _cart = new Cart(mockedGetProduct, productLineItemMockImpl);
+        const _cart = new Cart(mockedGetProduct, productLineItemMockImpl, mockPromotionManager);
 
         let expectedTotal = 0;
 
@@ -196,5 +203,30 @@ describe('The cart\'s getPretaxTotal method', () => {
 
             expect(pretaxTotal).toBe(expectedTotal);
         });
+    });
+
+    test('That getting the cart pretax total will call promotionManager.getApplicablePromotions once per item', () => {
+        jest.mock('../productLineItem');
+
+        const catalogData = require('./catalog.test.json'),
+            mockedGetProduct = getMockedProductManager((productID => {
+                return catalogData[productID];
+            })),
+            mockPromotionManager = getMockedPromotionManager();
+
+        function productLineItemMockImpl(product, quantity) {
+            this.getPrice = () => {
+                return catalogData[product.ID].pricePerUnit * catalogData[product.ID].quantity;
+            }
+        }
+
+        const _cart = new Cart(mockedGetProduct, productLineItemMockImpl, mockPromotionManager);
+        
+        Object.keys(catalogData).forEach(productID => {
+            _cart.addItem(productID, catalogData[productID].quantity);
+        });
+
+        const pretaxTotal = _cart.getPretaxTotal();
+        expect(mockPromotionManager.getApplicablePromotions.mock.calls.length).toBe(Object.keys(catalogData).length);
     });
 });

@@ -5,13 +5,15 @@ class Cart {
      * Represents the  cart object.
      * 
      * @constructor
-     * @param ProductManager {Object} - Object used to interact with the product catalog.
+     * @param productManager {Object} - Object used to interact with the product catalog.
      * @param productLineItemClass {Class} - Class to be used to wrap products in the cart.
+     * @param promotionManager {PromotionManager} - the promotion manager that the cart will use to determine discounted prices items.
      */
-    constructor (productManager, productLineItemClass) {
+    constructor (productManager, productLineItemClass, promotionManager) {
         this.productLineItems = {};
         this.productManager = productManager;
         this.productLineItemClass = productLineItemClass;
+        this.promotionManager = promotionManager;
     }
 
     /**
@@ -49,13 +51,17 @@ class Cart {
      */
     getPretaxTotal () {
         return Object.keys(this.productLineItems).reduce((totalPrice, productID) => {
-            const productLineItem = this.productLineItems[productID];
+            const productLineItem = this.productLineItems[productID],
+                productLineItemPrice = productLineItem.getPrice(),
+                
+                productPromotion = this.promotionManager.getApplicablePromotions(productID);
 
-            /* Passing the Product ID in at this point makes it easier to mock the ProductLineItem class in the test suite.
-             * I think that if I were more familiar with the framework I would be more comfortable creating the Mocked
-             * implementation without having to rely on this workaround.
-             */
-            return (totalPrice + productLineItem.getPrice(productID));
+            let discountAmount = 0;
+            if (productPromotion) {
+                discountAmount = this.promotionManager.getDiscountAmount(productPromotion, productLineItem.quantity, productLineItem.product.price);
+            }
+
+            return (totalPrice + productLineItemPrice - discountAmount);
         }, 0);
     }
 }
