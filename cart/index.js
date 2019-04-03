@@ -61,7 +61,7 @@ class Cart {
                 discountAmount = this.promotionManager.getDiscountAmount(productPromotion, productLineItem.quantity, productLineItem.product.price);
             }
 
-            return (totalPrice + productLineItemPrice - discountAmount);
+            return (totalPrice + (productLineItemPrice - discountAmount));
         }, 0);
     }
 }

@@ -16,15 +16,15 @@ function getMockedProductManager (getProductDefinition) {
     return productManager();
 }
 
-function getMockedPromotionManager () {
+function getMockedPromotionManager (promotions, getPrice, getPromotion) {
     jest.mock('../promotionManager');
 
     const promotionManager = require('../promotionManager');
 
     promotionManager.mockImplementation(() => {
         return {
-            getDiscountedAmount: jest.fn(),
-            getApplicablePromotions: jest.fn()
+            getDiscountAmount: jest.fn(getPrice),
+            getApplicablePromotions: jest.fn(getPromotion)
         }
     });
     return promotionManager();
@@ -228,5 +228,34 @@ describe('The cart\'s getPretaxTotal method', () => {
 
         const pretaxTotal = _cart.getPretaxTotal();
         expect(mockPromotionManager.getApplicablePromotions.mock.calls.length).toBe(Object.keys(catalogData).length);
+    });
+
+    test('That getting the cart pretax total will call promotionManager.getDiscountAmount once per item', () => {
+        jest.mock('../productLineItem');
+
+        const catalogData = require('./catalog.test.json'),
+            mockedGetProduct = getMockedProductManager((productID => {
+                return catalogData[productID];
+            })),
+            mockPromotionManager = getMockedPromotionManager([], () => 0, () => true);
+
+        function productLineItemMockImpl(product, quantity) {
+            this.getPrice = () => {
+                return catalogData[product.ID].pricePerUnit * catalogData[product.ID].quantity;
+            }
+            this.product = {
+                price: 1,
+                quantity: 1
+            }
+        }
+
+        const _cart = new Cart(mockedGetProduct, productLineItemMockImpl, mockPromotionManager);
+        
+        Object.keys(catalogData).forEach(productID => {
+            _cart.addItem(productID, catalogData[productID].quantity);
+        });
+
+        const pretaxTotal = _cart.getPretaxTotal();
+        expect(mockPromotionManager.getDiscountAmount.mock.calls.length).toBe(Object.keys(catalogData).length);
     });
 });

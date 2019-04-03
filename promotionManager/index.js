@@ -25,10 +25,10 @@ class PromotionManager {
       * @param dollarAmount {number} - The fractional dollar amount to be rounded.
       * @returns {number} - the dollar amount rounded to two decimal places.
       */
-      roundToNearestCent(dollarAmount) {
-        const centAmount = dollarAmount * 100;
-        return Math.round(centAmount) / 100;
-      }
+    roundToNearestCent(dollarAmount) {
+      const centAmount = dollarAmount * 100;
+      return Math.round(centAmount) / 100;
+    }
 
      /**
       * Calculates the discount amount for a single ProductLineItem in the cart for promotions with 
