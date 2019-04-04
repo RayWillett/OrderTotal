@@ -22,7 +22,6 @@ describe('Creating a Cart instance', () => {
     });
 });
 
-
 describe('Adding products to the cart', () => {
     test('That the cart has the correct number of unique items in it', () => {
         let productID = products[1].ID;
