@@ -1,4 +1,5 @@
-const Cart = require('../index');
+const Cart = require('../index'),
+    roundToNearestCent = require('../../util/roundToNearestCent');
 
 let cart;
 
@@ -265,7 +266,7 @@ describe('The cart\'s getPretaxTotal method', () => {
             const pretaxTotal = _cart.getPretaxTotal();
             expectedTotal += (catalogData[productID].pricePerUnit * catalogData[productID].quantity);
 
-            expect(pretaxTotal).toBe(expectedTotal);
+            expect(pretaxTotal).toBe(roundToNearestCent(expectedTotal));
         });
     });
 

@@ -1,6 +1,6 @@
 {
     "none": [],
-    "active": [
+    "limitless": [
         {
             "type": "markdown",
             "productID": "soup",
@@ -14,6 +14,18 @@
             "buy": 1,
             "get": 1,
             "percentOff": 0.5
+        },
+        {
+            "type": "buyNgeM_weighted",
+            "productID": "salmon",
+            "buy": 1.5,
+            "percentOff": 0.25
+        },
+        {
+            "type": "bundle",
+            "productID": "12 pack of toilet paper",
+            "quantityNeeded": 3,
+            "newPrice": 20.00
         }
     ]
 }

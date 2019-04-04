@@ -1,4 +1,5 @@
-const message = require('../util/message.json');
+const message = require('../util/message.json'),
+    roundToNearestCent = require('../util/roundToNearestCent');
 
 class Cart {
     /**
@@ -80,7 +81,7 @@ class Cart {
                 discountAmount = this.promotionManager.getDiscountAmount(productPromotion, productLineItem.quantity, productLineItem.product.pricePerUnit);
             }
 
-            return (totalPrice + (productLineItemPrice - discountAmount));
+            return roundToNearestCent(totalPrice + (productLineItemPrice - discountAmount));
         }, 0);
     }
 }

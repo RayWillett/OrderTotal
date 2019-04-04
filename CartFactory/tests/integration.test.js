@@ -108,21 +108,28 @@ describe('Removing items from the cart', () => {
 
 describe('The cart promotions', () => {
     beforeEach(() => {
-        const promotions = promotionData.active;
+        const promotions = promotionData.limitless;
         cart = CartFactory(products, promotions);
     });
 
-    test('That the simple cart promotions take affect', () => {
+    test('That the markdown cart promotions take affect', () => {
         const product = products[1];
         expect(cart.getPretaxTotal()).toBe(0);
         cart.addItem(product.ID, 1);
         expect(cart.getPretaxTotal()).toBe(0.49);
     });
 
-    test('That the more complicated cart promotions take affect', () => {
+    test('That the Buy X Get Y cart promotions take affect', () => {
         const product = products[3];
         expect(cart.getPretaxTotal()).toBe(0);
         cart.addItem(product.ID, 2);
         expect(cart.getPretaxTotal()).toBe(19.48);
+    });
+
+    test('That the Buy M Get N of equal or lesser value cart promotions take affect', () => {
+        const product = products[2];
+        expect(cart.getPretaxTotal()).toBe(0);
+        cart.addItem(product.ID, 2);
+        expect(cart.getPretaxTotal()).toBe(13.09);
     });
 });
