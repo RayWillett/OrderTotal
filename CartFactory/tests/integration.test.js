@@ -179,4 +179,15 @@ describe('The cart promotions with limits', () => {
         cart.addItem(product.ID, 1);
         expect(cart.getPretaxTotal()).toBe(38.97);
     });
+
+    test('That the bundle cart promotions take affect', () => {
+        const product = products[4];
+        expect(cart.getPretaxTotal()).toBe(0);
+        cart.addItem(product.ID, 2);
+        expect(cart.getPretaxTotal()).toBe(11.98);
+        cart.addItem(product.ID, 1);
+        expect(cart.getPretaxTotal()).toBe(15.00);
+        cart.addItem(product.ID, 3);
+        expect(cart.getPretaxTotal()).toBe(32.97);
+    });
 });
