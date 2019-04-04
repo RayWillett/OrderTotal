@@ -3,7 +3,7 @@ const message = require('../util/message.json'),
 
 class Cart {
     /**
-     * Represents the  cart object.
+     * Represents the  cart object. Complex dependencies are injected.
      * 
      * @constructor
      * @param productManager {Object} - Object used to interact with the product catalog.
