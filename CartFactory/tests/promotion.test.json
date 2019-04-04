@@ -27,5 +27,37 @@
             "quantityNeeded": 3,
             "newPrice": 15.00
         }
+    ],
+    "limited": [
+        {
+            "type": "markdown",
+            "productID": "soup",
+            "buy": 0,
+            "get": 1,
+            "percentOff": 0.5,
+            "limit": 1
+        },
+        {
+            "type": "buyXgetY",
+            "productID": "talapia",
+            "buy": 1,
+            "get": 1,
+            "percentOff": 0.5,
+            "limit": 4
+        },
+        {
+            "type": "buyNgeM_weighted",
+            "productID": "salmon",
+            "buy": 1.5,
+            "percentOff": 0.25,
+            "limit": 3
+        },
+        {
+            "type": "bundle",
+            "productID": "12 pack of toilet paper",
+            "quantityNeeded": 3,
+            "newPrice": 15.00,
+            "limit": 3
+        }
     ]
 }

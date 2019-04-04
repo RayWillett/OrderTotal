@@ -106,7 +106,7 @@ describe('Removing items from the cart', () => {
     });
 });
 
-describe('The cart promotions', () => {
+describe('The cart promotions without limits', () => {
     beforeEach(() => {
         const promotions = promotionData.limitless;
         cart = CartFactory(products, promotions);
@@ -119,18 +119,18 @@ describe('The cart promotions', () => {
         expect(cart.getPretaxTotal()).toBe(0.49);
     });
 
-    test('That the Buy X Get Y cart promotions take affect', () => {
-        const product = products[3];
-        expect(cart.getPretaxTotal()).toBe(0);
-        cart.addItem(product.ID, 2);
-        expect(cart.getPretaxTotal()).toBe(19.48);
-    });
-
     test('That the Buy M Get N of equal or lesser value cart promotions take affect', () => {
         const product = products[2];
         expect(cart.getPretaxTotal()).toBe(0);
         cart.addItem(product.ID, 2);
         expect(cart.getPretaxTotal()).toBe(13.09);
+    });
+
+    test('That the Buy X Get Y cart promotions take affect', () => {
+        const product = products[3];
+        expect(cart.getPretaxTotal()).toBe(0);
+        cart.addItem(product.ID, 2);
+        expect(cart.getPretaxTotal()).toBe(19.48);
     });
 
     test('That the bundle cart promotions take affect', () => {
@@ -142,5 +142,21 @@ describe('The cart promotions', () => {
         expect(cart.getPretaxTotal()).toBe(15.00);
         cart.addItem(product.ID, 1);
         expect(cart.getPretaxTotal()).toBe(20.99);
+    });
+});
+
+describe('The cart promotions with limits', () => {
+    beforeEach(() => {
+        const promotions = promotionData.limited;
+        cart = CartFactory(products, promotions);
+    });
+
+    test('That the markdown cart promotions take affect', () => {
+        const product = products[1];
+        expect(cart.getPretaxTotal()).toBe(0);
+        cart.addItem(product.ID, 1);
+        expect(cart.getPretaxTotal()).toBe(0.49);
+        cart.addItem(product.ID, 1);
+        expect(cart.getPretaxTotal()).toBe(1.47);
     });
 });
