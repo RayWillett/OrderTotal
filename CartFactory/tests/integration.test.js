@@ -168,4 +168,15 @@ describe('The cart promotions with limits', () => {
         cart.addItem(product.ID, 0.5);
         expect(cart.getPretaxTotal()).toBe(15.70);
     });
+
+    test('That the Buy X Get Y cart promotions take affect', () => {
+        const product = products[3];
+        expect(cart.getPretaxTotal()).toBe(0);
+        cart.addItem(product.ID, 2);
+        expect(cart.getPretaxTotal()).toBe(19.48);
+        cart.addItem(product.ID, 1);
+        expect(cart.getPretaxTotal()).toBe(32.47);
+        cart.addItem(product.ID, 1);
+        expect(cart.getPretaxTotal()).toBe(38.97);
+    });
 });
