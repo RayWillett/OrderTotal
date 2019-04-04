@@ -159,4 +159,13 @@ describe('The cart promotions with limits', () => {
         cart.addItem(product.ID, 1);
         expect(cart.getPretaxTotal()).toBe(1.47);
     });
+
+    test('That the Buy M Get N of equal or lesser value cart promotions take affect', () => {
+        const product = products[2];
+        expect(cart.getPretaxTotal()).toBe(0);
+        cart.addItem(product.ID, 2);
+        expect(cart.getPretaxTotal()).toBe(13.09);
+        cart.addItem(product.ID, 0.5);
+        expect(cart.getPretaxTotal()).toBe(15.70);
+    });
 });
