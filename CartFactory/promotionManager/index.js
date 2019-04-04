@@ -1,3 +1,5 @@
+const roundToNearestCent = require('../util/roundToNearestCent');
+
 class PromotionManager {
 
     /**
@@ -18,17 +20,6 @@ class PromotionManager {
      getApplicablePromotions (productID) {
         return this.availablePromotions.filter( promotion => promotion.productID == productID ).pop();
      }
-
-     /**
-      * 
-      *
-      * @param dollarAmount {number} - The fractional dollar amount to be rounded.
-      * @returns {number} - the dollar amount rounded to two decimal places.
-      */
-    roundToNearestCent(dollarAmount) {
-      const centAmount = dollarAmount * 100;
-      return Math.round(centAmount) / 100;
-    }
 
      /**
       * Calculates the discount amount for a single ProductLineItem in the cart for promotions with 
@@ -117,13 +108,13 @@ class PromotionManager {
                 discountAmount = this._getMarkdownDiscountAmount(promotion, appliedTo, productPrice);
                 break;
             case "bundle":
-                discountAmount =  this._getBundleDiscountAmount(promotion, appliedTo, productPrice);
+                discountAmount = this._getBundleDiscountAmount(promotion, appliedTo, productPrice);
                 break;
             case "buyNgeM_weighted":
-                discountAmount =  this._getWeightedDiscountAmount(promotion, quantity, productPrice);
+                discountAmount = this._getWeightedDiscountAmount(promotion, quantity, productPrice);
                 break;
         }
-        return this.roundToNearestCent(discountAmount);
+        return roundToNearestCent(discountAmount);
      }
 }
 
