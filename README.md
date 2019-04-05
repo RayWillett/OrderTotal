@@ -44,3 +44,9 @@ newPrice := The new price of a group of products in a bundle {number} [only mean
 
 limit := The total number of products which a person can use as part of a promotion before the promotion cannot be used anymore {number} [optional, no value means the promotion is unlimited]
 ```
+
+
+Unit tests can be found in each directory following the `*.test.js` or `*.test.json` naming format. Integration tests can be found in the `./CartFactory/tests/integration.test.js` directory
+
+
+Thanks for reading, have a great day.
