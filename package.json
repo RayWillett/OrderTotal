@@ -7,9 +7,11 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "browserify": "^16.2.3",
     "jest": "^24.5.0"
   },
   "scripts": {
-    "test": "node_modules/jest/bin/jest.js"
+    "test": "node_modules/jest/bin/jest.js",
+    "build": "node_modules/browserify/bin/cmd.js index.js -o build/bundle.js"
   }
 }
