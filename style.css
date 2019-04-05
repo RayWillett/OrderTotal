@@ -1,0 +1,50 @@
+label {
+    font-weight: bold;
+}
+textarea {
+    width: 100%;
+    min-height: 500px;
+    outline: none;
+}
+textarea.error {
+    outline: 1px solid red;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+li {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+#add-to-cart {
+    display: flex;
+    flex-direction: column;
+}
+.cart-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 2%;
+}
+.data-fields-wrapper {
+    display: flex;
+}
+.data-input-wrapper {
+    margin: 0 auto;
+    width: 45%;
+}
+.error-message {
+    display: none;
+    color: red;
+}
+.sub-label-text {
+    font-size: 0.8em;
+    font-style: italic;
+}
+.error + .error-message {
+    display: block;
+}
