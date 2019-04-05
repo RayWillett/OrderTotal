@@ -14,7 +14,7 @@
         "percentOff": 0.5
     },
     {
-        "type": "buyNgeM_weighted",
+        "type": "buyNgetM_weighted",
         "productID": "salmon",
         "buy": 1.5,
         "percentOff": 0.25

@@ -91,7 +91,7 @@ class PromotionManager {
 
     /**
       * Calculates the discount amount for a single ProductLineItem in the cart for promotions with 
-      * the following types: buyNgeM_weighted.
+      * the following types: buyNgetM_weighted.
       *
       * @param promotion {object} - the promotion to get the discount amount of.
       * @param quantity {number} - The quantity of the item in the cart.
@@ -110,7 +110,7 @@ class PromotionManager {
             case "bundle":
                 discountAmount = this._getBundleDiscountAmount(promotion, appliedTo, productPrice);
                 break;
-            case "buyNgeM_weighted":
+            case "buyNgetM_weighted":
                 discountAmount = this._getWeightedDiscountAmount(promotion, quantity, productPrice);
                 break;
         }

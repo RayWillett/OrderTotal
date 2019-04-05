@@ -1,5 +1,5 @@
 {
-    "legalTypes": ["markdown", "bundle", "buyXgetY", "buyNgeM_weighted"],
+    "legalTypes": ["markdown", "bundle", "buyXgetY", "buyNgetM_weighted"],
     "promotions": [
         {
             "type": "markdown",
@@ -125,7 +125,7 @@
             }
         },
         {
-            "type": "buyNgeM_weighted",
+            "type": "buyNgetM_weighted",
             "productID": "beef",
             "buy": 1.5,
             "percentOff": 0.25,
