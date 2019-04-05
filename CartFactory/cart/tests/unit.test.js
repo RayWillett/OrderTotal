@@ -1,5 +1,5 @@
 const Cart = require('../index'),
-    roundToNearestCent = require('../../util/roundToNearestCent');
+    roundToNearestCent = require('../../util/roundToNearestHundredth');
 
 let cart;
 

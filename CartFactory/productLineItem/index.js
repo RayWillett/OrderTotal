@@ -1,4 +1,5 @@
-const message = require('../util/message.json');
+const message = require('../util/message.json'),
+    roundToNearestHundredth = require('../util/roundToNearestHundredth');
 
 const validateQuantity = (product, quantity) => {
     const isFractionalQuantity = !Number.isInteger(quantity);
@@ -37,7 +38,7 @@ class ProductLineItem {
        */
       addQuantity (increaseBy) {
         validateQuantity(this.product, increaseBy);
-        this.quantity += increaseBy;
+        this.quantity = roundToNearestHundredth(this.quantity + increaseBy);
       }
 
       /**
@@ -47,7 +48,7 @@ class ProductLineItem {
        */
       removeQuantity (decreaseBy) {
         validateQuantity(this.product, decreaseBy);
-        this.quantity -= decreaseBy;
+        this.quantity = roundToNearestHundredth(this.quantity - decreaseBy);
         if (this.quantity < 0) {
           this.quantity = 0;
         }

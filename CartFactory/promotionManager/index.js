@@ -1,4 +1,4 @@
-const roundToNearestCent = require('../util/roundToNearestCent');
+const roundToNearestCent = require('../util/roundToNearestHundredth');
 
 class PromotionManager {
 

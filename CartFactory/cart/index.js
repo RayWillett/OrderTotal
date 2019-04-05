@@ -1,5 +1,5 @@
 const message = require('../util/message.json'),
-    roundToNearestCent = require('../util/roundToNearestCent');
+    roundToNearestCent = require('../util/roundToNearestHundredth');
 
 class Cart {
     /**

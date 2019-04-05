@@ -1,4 +1,4 @@
-const roundToNearestCent = require('./roundToNearestCent');
+const roundToNearestCent = require('./roundToNearestHundredth');
 
 describe('The roundToNearestCent method', () => {
     test('that a whole number of cents is not changed', () => {
