@@ -66,10 +66,6 @@ function initializeEventListeners ($) {
         updateOrderTotal($, cart);
     });
 
-    $('#cart-data').addEventListener('submit', (e) => {
-        e.preventDefault();
-        clearCart($);
-    });
     $('#clear-cart').addEventListener('click', (e) => {
         e.preventDefault();
         clearCart($);
