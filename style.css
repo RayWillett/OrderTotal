@@ -25,6 +25,9 @@ li {
     display: flex;
     flex-direction: column;
 }
+#cart-data button {
+    margin-left: 2.5%;
+}
 .cart-wrapper {
     display: flex;
     justify-content: space-between;

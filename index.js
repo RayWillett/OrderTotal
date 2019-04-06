@@ -29,7 +29,7 @@ function updateOrderTotal($, cart) {
 function clearCart($) {
     promotions = JSON.parse($('#promotions').value);
     products = JSON.parse($('#products').value);
-    initializeCart();
+    initializeCart($);
     alert('The Cart object has been reset.');
 }
 
