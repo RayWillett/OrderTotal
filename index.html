@@ -6,8 +6,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <!-- use material css for base elemnt styles -->
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
         <!-- simple styles to make the UI easier to use -->
         <link rel="stylesheet" href="./style.css">
@@ -17,48 +16,49 @@
     </head>
     <body>
         <div>
-            <div class="cart-wrapper">
+            <div class="cart-wrapper wrapper">
                 <div class="col">
-                    <div class="order-total">
-                        <span>$</span>
-                        <span id="order-total">0.00</span>
-                    </div>
                     <div class="product-line-items-table">
-                        <span class="id">Product ID</span>
-                        <span class="qty">Quantity</span>
+                        <div class="row">
+                            <span class="id col header">Product ID</span>
+                            <span class="qty col header">Quantity</span>
+                        </div>
                         <ul id="items-in-cart">
+                            <li class="row"><span>No products in cart yet.</span></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col">
                     <form id="add-to-cart" action="#">
-                        <label for="product_id">Product ID:</label>
-                        <input name="product_id" type="text">
-                        <label for="product_id">Product Quantity:</label>
-                        <input name="product_qty" type="text">
-                        <div>
-                            <button type="submit" name="add">Add To Cart</button>
-                        </div>
-                        <div>
-                            <button type="submit" name="remove">Remove from Cart</button>
+                        <label for="product_id" class="header">Product ID:</label>
+                        <input name="product_id" type="text" placeholder="e.g. talapia">
+                        <label for="product_id" class="header">Product Quantity:</label>
+                        <input name="product_qty" type="text" placeholder="e.g. 3">
+                        <div class="row">
+                            <div class="row-item">
+                                <button type="submit" name="add" title="Add and item to your cart.">Add To Cart</button>
+                            </div>
+                            <div class="row-item">
+                                <button type="submit" name="remove" title="Remove an item from your cart.">Remove from Cart</button>
+                            </div>
+                            <div class="order-total">
+                                <span><span class="header">Total Price:</span> $</span><span id="order-total">0.00</span>
+                            </div>
                         </div>
                     </form>
-                    <button id="clear-cart">clear cart</button>
                 </div>
             </div>
             <form id="cart-data" action="#">
-                <div class="data-fields-wrapper">
-                    <div class="data-input-wrapper">
-                        <label>Product Data</label>
-                        <div class="sub-label-text"><span>must be valid JSON</span></div>
+                <div class="data-fields-wrapper wrapper">
+                    <div class="data-input-wrapper col">
+                        <label><span class="header">Product Data</span> <span class="sub-label-text">(valid JSON)</span></label>
                         <textarea id="products"></textarea>
                         <span class="error-message">
                             This is not valid JSON.
                         </span>
                     </div>
-                    <div class="data-input-wrapper">
-                        <label>Promotional Data</label>
-                        <div class="sub-label-text"><span>must be valid JSON</span></div>
+                    <div class="data-input-wrapper col">
+                        <label><span class="header">Promotional Data</span> <span class="sub-label-text">(valid JSON)</span></label>
                         <textarea id="promotions"></textarea>
                         <span class="error-message">
                             This is not valid JSON.

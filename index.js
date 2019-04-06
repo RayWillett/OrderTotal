@@ -18,12 +18,6 @@ function hideError(target) {
 
 function updateOrderTotal($, cart) {
     $('#order-total').textContent = cart.getPretaxTotal();
-    let itemsInCartHTML = '';
-    Object.keys(cart.productLineItems).forEach( (productID) => {
-        const quantity = cart.productLineItems[productID].quantity;
-        itemsInCartHTML += `<li class="item"><span class="id">${productID}</span><span class="qty">${quantity}</span></li>`;
-    });
-    $('#items-in-cart').innerHTML = itemsInCartHTML;
 }
 
 function clearCart($) {
@@ -38,6 +32,21 @@ function initializeCartDom($) {
     $('#products').value = prettifyJSON(products);
 }
 
+function updateProductLineItemList($, cart) {
+    let emptyCartContent = '<li class="item row">No products currently in the cart.</li>',
+        itemsInCartHTML = '',
+        productsInCart = Object.keys(cart.productLineItems);
+
+    productsInCart.forEach( (productID) => {
+        const quantity = cart.productLineItems[productID].quantity;
+        itemsInCartHTML += `<li class="item row"><span class="id col">${productID}</span><span class="qty col">${quantity}</span></li>`;
+    });
+    if (0 == productsInCart.length) {
+        itemsInCartHTML = emptyCartContent;
+    }
+    $('#items-in-cart').innerHTML = itemsInCartHTML;
+}
+
 function initializeEventListeners ($) {
     $('#add-to-cart').addEventListener('submit', (e) => {
         e.preventDefault();
@@ -49,7 +58,7 @@ function initializeEventListeners ($) {
         } catch (err) {
             alert(err.message);
         }
-        updateOrderTotal($, cart);
+        updateDom($, cart);
     });
 
     $('[name="remove"]').addEventListener('click', (e) => {
@@ -63,12 +72,7 @@ function initializeEventListeners ($) {
             productQuantity = null;
         }
         cart.removeItem(productID, productQuantity);
-        updateOrderTotal($, cart);
-    });
-
-    $('#clear-cart').addEventListener('click', (e) => {
-        e.preventDefault();
-        clearCart($);
+        updateDom($, cart);
     });
 
     document.querySelectorAll('textarea').forEach( node => {
@@ -88,9 +92,14 @@ function initializeEventListeners ($) {
     });
 }
 
+function updateDom($, cart) {
+    updateOrderTotal($, cart);
+    updateProductLineItemList($, cart);
+}
+
 function initializeCart($) {
     cart = CartFactory(products, promotions);
-    updateOrderTotal($, cart);
+    updateDom($, cart);
 }
 
 function main ($) {
